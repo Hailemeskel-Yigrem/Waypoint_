@@ -1,0 +1,13 @@
+import { describe, it, expect } from 'vitest';
+import { AuditEventService, MemoryAuditEventRepository } from '@waypoint/domain';
+
+describe('api audit wiring', () => {
+  it('creates via domain service', async () => {
+    const service = new AuditEventService(new MemoryAuditEventRepository());
+    const result = await service.create({
+      organizationId: '11111111-1111-1111-1111-111111111111',
+      name: 'API AuditEvent',
+    });
+    expect(result.ok).toBe(true);
+  });
+});

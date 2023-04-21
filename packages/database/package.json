@@ -1,0 +1,33 @@
+{
+  "name": "@waypoint/database",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist",
+    "migrate": "node dist/migrate.js",
+    "seed": "node dist/seed.js",
+    "lint": "node -e \"process.exit(0)\""
+  },
+  "dependencies": {
+    "@waypoint/shared": "workspace:*",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.8",
+    "typescript": "^5.7.3",
+    "rimraf": "^6.0.1",
+    "@types/pg": "^8.11.10"
+  }
+}

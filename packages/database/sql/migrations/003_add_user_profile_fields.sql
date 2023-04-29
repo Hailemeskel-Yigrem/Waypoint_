@@ -1,0 +1,2 @@
+-- Migration: 003_add_user_profile_fields.sql
+ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar_url TEXT; ALTER TABLE users ADD COLUMN IF NOT EXISTS department VARCHAR(100); ALTER TABLE users ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;

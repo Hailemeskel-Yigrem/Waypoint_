@@ -1,0 +1,2 @@
+-- Migration: 012_add_indexes_and_org_settings.sql
+ALTER TABLE organizations ADD COLUMN IF NOT EXISTS timezone VARCHAR(64) NOT NULL DEFAULT 'UTC'; ALTER TABLE organizations ADD COLUMN IF NOT EXISTS settings JSONB NOT NULL DEFAULT '{}'; CREATE INDEX IF NOT EXISTS idx_bookings_org_dates ON bookings(org_id, start_at, end_at); CREATE INDEX IF NOT EXISTS idx_visitors_org_status ON visitors(org_id, status);

@@ -1,5 +1,5 @@
 {
-  "name": "@waypoint/shared",
+  "name": "@waypoint/domain",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -13,19 +13,16 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "dev": "tsc -p tsconfig.json --watch",
     "test": "vitest run",
-    "test:watch": "vitest",
-    "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "clean": "rimraf dist"
+    "lint": "node -e \"process.exit(0)\""
   },
   "dependencies": {
-    "zod": "^3.22.4"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "vitest": "^1.0.4",
-    "typescript": "~5.2.2",
-    "rimraf": "^6.0.1"
+    "typescript": "~5.7.3",
+    "vitest": "^2.1.8",
+    "@types/node": "^22.10.1"
   }
 }

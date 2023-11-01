@@ -1,0 +1,10 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.content {
+  color: #1f2937;
+  line-height: 1.6;
+}

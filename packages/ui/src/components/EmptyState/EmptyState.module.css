@@ -1,0 +1,14 @@
+.empty {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: #64748b;
+}
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.5rem;
+}
+.action {
+  margin-top: 1rem;
+}

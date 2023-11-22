@@ -1,0 +1,18 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  margin-bottom: 1rem;
+}
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.required::after {
+  content: ' *';
+  color: #dc2626;
+}
+.error {
+  font-size: 0.8125rem;
+  color: #dc2626;
+}

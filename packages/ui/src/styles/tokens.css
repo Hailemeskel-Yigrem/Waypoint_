@@ -1,0 +1,8 @@
+:root {
+  --wp-color-primary: #2563eb;
+  --wp-color-text: #0f172a;
+  --wp-color-muted: #64748b;
+  --wp-color-border: #e2e8f0;
+  --wp-radius: 6px;
+  --wp-font: system-ui, -apple-system, sans-serif;
+}

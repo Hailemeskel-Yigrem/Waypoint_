@@ -1,0 +1,13 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+.gap-sm {
+  gap: 0.5rem;
+}
+.gap-md {
+  gap: 1rem;
+}
+.gap-lg {
+  gap: 1.5rem;
+}

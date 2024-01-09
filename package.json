@@ -5,10 +5,10 @@
   "description": "Waypoint \u2014 multi-tenant workplace operations platform",
   "license": "MIT",
   "engines": {
-    "node": ">=18.0.0",
-    "pnpm": ">=8.0.0"
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
   },
-  "packageManager": "pnpm@8.10.0",
+  "packageManager": "pnpm@9.1.0",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
@@ -21,13 +21,13 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.5",
-    "eslint": "^8.54.0",
+    "eslint": "^9.0.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.18",
-    "prettier": "^3.1.0",
+    "prettier": "^3.2.5",
     "rimraf": "^6.0.1",
-    "turbo": "^1.10.16",
-    "typescript": "~5.2.2",
-    "vitest": "^1.0.4"
+    "turbo": "^1.13.3",
+    "typescript": "~5.4.5",
+    "vitest": "^1.6.0"
   }
 }

@@ -1,0 +1,14 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release-notes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          echo "Waypoint release ${GITHUB_REF_NAME}" >> "$GITHUB_STEP_SUMMARY"

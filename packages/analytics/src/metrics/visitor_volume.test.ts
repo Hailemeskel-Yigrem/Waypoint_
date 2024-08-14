@@ -1,0 +1,19 @@
+import { describe, it, expect } from 'vitest';
+import { aggregateVisitorVolume, normalizeVisitorVolume } from './visitor_volume.js';
+
+describe('visitor_volume', () => {
+  it('aggregates samples', () => {
+    const result = aggregateVisitorVolume([
+      { organizationId: 'o', timestamp: '2024-01-01T00:00:00Z', value: 10 },
+      { organizationId: 'o', timestamp: '2024-01-01T01:00:00Z', value: 30 },
+    ]);
+    expect(result.average).toBe(20);
+    expect(result.max).toBe(30);
+    expect(result.count).toBe(2);
+  });
+
+  it('normalizes values', () => {
+    expect(normalizeVisitorVolume(120)).toBe(100);
+    expect(normalizeVisitorVolume(-5)).toBe(0);
+  });
+});

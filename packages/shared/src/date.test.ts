@@ -17,7 +17,9 @@ describe('date utils', () => {
     expect(formatDuration(90)).toBe('1h 30m');
   });
   it('isSameDay', () => {
-    expect(isSameDay(new Date('2026-01-01T08:00:00Z'), new Date('2026-01-01T20:00:00Z'))).toBe(true);
+    expect(isSameDay(new Date('2026-01-01T08:00:00Z'), new Date('2026-01-01T20:00:00Z'))).toBe(
+      true,
+    );
   });
   it('startOfDay', () => {
     const d = startOfDay(new Date('2026-01-01T15:30:00Z'));

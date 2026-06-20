@@ -17,12 +17,18 @@ export class AccessService {
     private readonly userRepo: UserRepository,
   ) {}
 
-  async create(organizationId: string, input: Omit<CreateAccessPolicyInput, 'organizationId'>): Promise<Result<AccessPolicy>> {
+  async create(
+    organizationId: string,
+    input: Omit<CreateAccessPolicyInput, 'organizationId'>,
+  ): Promise<Result<AccessPolicy>> {
     const policy = await this.repo.create({ ...input, organizationId });
     return ok(policy);
   }
 
-  async list(organizationId: string, query: PaginationQuery): Promise<PaginatedResult<AccessPolicy>> {
+  async list(
+    organizationId: string,
+    query: PaginationQuery,
+  ): Promise<PaginatedResult<AccessPolicy>> {
     return this.repo.list(organizationId, query);
   }
 

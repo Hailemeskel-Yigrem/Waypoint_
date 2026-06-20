@@ -17,4 +17,3 @@ export interface UsageSnapshot {
   deskCount: number;
   bookingsThisMonth: number;
 }
-

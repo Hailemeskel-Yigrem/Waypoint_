@@ -12,4 +12,3 @@ describe('id', () => {
     expect(extractPrefix('org_abc123')).toBe('org');
   });
 });
-

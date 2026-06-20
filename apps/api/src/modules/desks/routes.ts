@@ -18,10 +18,16 @@ export function registerDeskRoutes(app: FastifyInstance): void {
     scoped.addHook('preHandler', app.authHook);
     scoped.addHook('preHandler', tenantMiddleware);
 
-    scoped.post('/desks', { preHandler: requireRole('owner', 'admin', 'manager') }, async (request, reply) => {
-      const body = createDeskSchema.parse(request.body);
-      reply.status(201).send({ data: throwIfError(await service.create(request.tenantId, body)) });
-    });
+    scoped.post(
+      '/desks',
+      { preHandler: requireRole('owner', 'admin', 'manager') },
+      async (request, reply) => {
+        const body = createDeskSchema.parse(request.body);
+        reply
+          .status(201)
+          .send({ data: throwIfError(await service.create(request.tenantId, body)) });
+      },
+    );
 
     scoped.get('/desks', async (request, reply) => {
       const query = listDesksQuerySchema.parse(request.query);
@@ -33,16 +39,24 @@ export function registerDeskRoutes(app: FastifyInstance): void {
       reply.send({ data: throwIfError(await service.getById(request.tenantId, deskId)) });
     });
 
-    scoped.patch('/desks/:deskId', { preHandler: requireRole('owner', 'admin', 'manager') }, async (request, reply) => {
-      const { deskId } = deskIdParamSchema.parse(request.params);
-      const body = updateDeskSchema.parse(request.body);
-      reply.send({ data: throwIfError(await service.update(request.tenantId, deskId, body)) });
-    });
+    scoped.patch(
+      '/desks/:deskId',
+      { preHandler: requireRole('owner', 'admin', 'manager') },
+      async (request, reply) => {
+        const { deskId } = deskIdParamSchema.parse(request.params);
+        const body = updateDeskSchema.parse(request.body);
+        reply.send({ data: throwIfError(await service.update(request.tenantId, deskId, body)) });
+      },
+    );
 
-    scoped.delete('/desks/:deskId', { preHandler: requireRole('owner', 'admin') }, async (request, reply) => {
-      const { deskId } = deskIdParamSchema.parse(request.params);
-      throwIfError(await service.delete(request.tenantId, deskId));
-      reply.status(204).send();
-    });
+    scoped.delete(
+      '/desks/:deskId',
+      { preHandler: requireRole('owner', 'admin') },
+      async (request, reply) => {
+        const { deskId } = deskIdParamSchema.parse(request.params);
+        throwIfError(await service.delete(request.tenantId, deskId));
+        reply.status(204).send();
+      },
+    );
   });
 }

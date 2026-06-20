@@ -1,5 +1,10 @@
 import type { FastifyInstance } from 'fastify';
-import { AssetService, MemoryAssetRepository, createAssetSchema, assetsFilterSchema } from '@waypoint/domain';
+import {
+  AssetService,
+  MemoryAssetRepository,
+  createAssetSchema,
+  assetsFilterSchema,
+} from '@waypoint/domain';
 
 export async function assetsRoutes(app: FastifyInstance): Promise<void> {
   const service = new AssetService(new MemoryAssetRepository());

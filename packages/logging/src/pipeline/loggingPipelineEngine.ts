@@ -21,20 +21,23 @@ export interface LoggingPipelineEngineResult {
 }
 
 export class LoggingPipelineEngine {
-
   processLogPipe1(input: LoggingPipelineEngineInput): LoggingPipelineEngineResult {
     const issues: string[] = [];
     if (!input.organizationId) issues.push('organizationId');
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_1_FAIL' : 'LogPipe_1_OK',
@@ -48,13 +51,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_2_FAIL' : 'LogPipe_2_OK',
@@ -68,13 +75,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_3_FAIL' : 'LogPipe_3_OK',
@@ -88,13 +99,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_4_FAIL' : 'LogPipe_4_OK',
@@ -108,13 +123,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_5_FAIL' : 'LogPipe_5_OK',
@@ -128,13 +147,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_6_FAIL' : 'LogPipe_6_OK',
@@ -148,13 +171,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_7_FAIL' : 'LogPipe_7_OK',
@@ -168,13 +195,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_8_FAIL' : 'LogPipe_8_OK',
@@ -188,13 +219,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_9_FAIL' : 'LogPipe_9_OK',
@@ -208,13 +243,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_10_FAIL' : 'LogPipe_10_OK',
@@ -228,13 +267,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_11_FAIL' : 'LogPipe_11_OK',
@@ -248,13 +291,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_12_FAIL' : 'LogPipe_12_OK',
@@ -268,13 +315,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_13_FAIL' : 'LogPipe_13_OK',
@@ -288,13 +339,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_14_FAIL' : 'LogPipe_14_OK',
@@ -308,13 +363,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_15_FAIL' : 'LogPipe_15_OK',
@@ -328,13 +387,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_16_FAIL' : 'LogPipe_16_OK',
@@ -348,13 +411,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_17_FAIL' : 'LogPipe_17_OK',
@@ -368,13 +435,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_18_FAIL' : 'LogPipe_18_OK',
@@ -388,13 +459,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_19_FAIL' : 'LogPipe_19_OK',
@@ -408,13 +483,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_20_FAIL' : 'LogPipe_20_OK',
@@ -428,13 +507,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_21_FAIL' : 'LogPipe_21_OK',
@@ -448,13 +531,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_22_FAIL' : 'LogPipe_22_OK',
@@ -468,13 +555,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_23_FAIL' : 'LogPipe_23_OK',
@@ -488,13 +579,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_24_FAIL' : 'LogPipe_24_OK',
@@ -508,13 +603,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_25_FAIL' : 'LogPipe_25_OK',
@@ -528,13 +627,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_26_FAIL' : 'LogPipe_26_OK',
@@ -548,13 +651,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_27_FAIL' : 'LogPipe_27_OK',
@@ -568,13 +675,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_28_FAIL' : 'LogPipe_28_OK',
@@ -588,13 +699,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_29_FAIL' : 'LogPipe_29_OK',
@@ -608,13 +723,17 @@ export class LoggingPipelineEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'LogPipe_30_FAIL' : 'LogPipe_30_OK',
@@ -658,7 +777,11 @@ export class LoggingPipelineEngine {
     ];
   }
 
-  summarize(results: LoggingPipelineEngineResult[]): { passed: number; failed: number; avgScore: number } {
+  summarize(results: LoggingPipelineEngineResult[]): {
+    passed: number;
+    failed: number;
+    avgScore: number;
+  } {
     const passed = results.filter((r) => r.ok).length;
     const failed = results.length - passed;
     const avgScore = results.reduce((a, b) => a + b.score, 0) / (results.length || 1);

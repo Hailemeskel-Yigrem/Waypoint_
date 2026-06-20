@@ -37,7 +37,10 @@ export interface AppOptions {
 
 export async function buildApp(options: AppOptions = {}): Promise<FastifyInstance> {
   const config = options.config ?? loadConfig();
-  const logger = createLogger({ level: config.LOG_LEVEL, pretty: config.LOG_PRETTY ?? config.NODE_ENV === 'development' });
+  const logger = createLogger({
+    level: config.LOG_LEVEL,
+    pretty: config.LOG_PRETTY ?? config.NODE_ENV === 'development',
+  });
 
   const app = Fastify({
     logger: false,
@@ -49,9 +52,14 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
 
   await app.register(configPlugin, config);
   await app.register(databasePlugin);
-  await app.register(cors, { origin: config.CORS_ORIGIN === '*' ? true : config.CORS_ORIGIN.split(',') });
+  await app.register(cors, {
+    origin: config.CORS_ORIGIN === '*' ? true : config.CORS_ORIGIN.split(','),
+  });
   await app.register(helmet, { contentSecurityPolicy: false });
-  await registerRateLimit(app, { max: config.RATE_LIMIT_MAX, timeWindow: config.RATE_LIMIT_WINDOW_MS });
+  await registerRateLimit(app, {
+    max: config.RATE_LIMIT_MAX,
+    timeWindow: config.RATE_LIMIT_WINDOW_MS,
+  });
 
   const repos = wireRepositories(options.repos ?? createMemoryRepositories());
   await app.register(repositoriesPlugin, repos);

@@ -18,13 +18,22 @@ export function registerDirectoryRoutes(app: FastifyInstance): void {
     scoped.addHook('preHandler', app.authHook);
     scoped.addHook('preHandler', tenantMiddleware);
 
-    scoped.post('/directory', { preHandler: requireRole('owner', 'admin') }, async (request, reply) => {
-      const body = createDirectoryEntrySchema.parse(request.body);
-      reply.status(201).send({ data: throwIfError(await service.create(request.tenantId, body)) });
-    });
+    scoped.post(
+      '/directory',
+      { preHandler: requireRole('owner', 'admin') },
+      async (request, reply) => {
+        const body = createDirectoryEntrySchema.parse(request.body);
+        reply
+          .status(201)
+          .send({ data: throwIfError(await service.create(request.tenantId, body)) });
+      },
+    );
 
     scoped.get('/directory', async (request, reply) => {
-      const query = { ...paginationQuerySchema.parse(request.query), ...directorySearchSchema.parse(request.query) };
+      const query = {
+        ...paginationQuerySchema.parse(request.query),
+        ...directorySearchSchema.parse(request.query),
+      };
       reply.send({ data: await service.search(request.tenantId, query) });
     });
 
@@ -33,16 +42,24 @@ export function registerDirectoryRoutes(app: FastifyInstance): void {
       reply.send({ data: throwIfError(await service.getById(request.tenantId, entryId)) });
     });
 
-    scoped.patch('/directory/:entryId', { preHandler: requireRole('owner', 'admin') }, async (request, reply) => {
-      const { entryId } = directoryEntryIdParamSchema.parse(request.params);
-      const body = updateDirectoryEntrySchema.parse(request.body);
-      reply.send({ data: throwIfError(await service.update(request.tenantId, entryId, body)) });
-    });
+    scoped.patch(
+      '/directory/:entryId',
+      { preHandler: requireRole('owner', 'admin') },
+      async (request, reply) => {
+        const { entryId } = directoryEntryIdParamSchema.parse(request.params);
+        const body = updateDirectoryEntrySchema.parse(request.body);
+        reply.send({ data: throwIfError(await service.update(request.tenantId, entryId, body)) });
+      },
+    );
 
-    scoped.delete('/directory/:entryId', { preHandler: requireRole('owner', 'admin') }, async (request, reply) => {
-      const { entryId } = directoryEntryIdParamSchema.parse(request.params);
-      throwIfError(await service.delete(request.tenantId, entryId));
-      reply.status(204).send();
-    });
+    scoped.delete(
+      '/directory/:entryId',
+      { preHandler: requireRole('owner', 'admin') },
+      async (request, reply) => {
+        const { entryId } = directoryEntryIdParamSchema.parse(request.params);
+        throwIfError(await service.delete(request.tenantId, entryId));
+        reply.status(204).send();
+      },
+    );
   });
 }

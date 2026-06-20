@@ -48,19 +48,10 @@ export function assertSameTenant(resourceOrgId: string, ctxOrgId: string): void 
   }
 }
 
-export function overlaps(
-  startA: Date,
-  endA: Date,
-  startB: Date,
-  endB: Date,
-): boolean {
+export function overlaps(startA: Date, endA: Date, startB: Date, endB: Date): boolean {
   return startA < endB && startB < endA;
 }
 
-export function isWithinWindow(
-  time: Date,
-  windowStart: Date,
-  windowEnd: Date,
-): boolean {
+export function isWithinWindow(time: Date, windowStart: Date, windowEnd: Date): boolean {
   return time >= windowStart && time <= windowEnd;
 }

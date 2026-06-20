@@ -10,7 +10,11 @@ export class MemoryBillingRepository implements BillingRepository {
     return this.store.get(organizationId) ?? null;
   }
 
-  async upsertSubscription(organizationId: string, plan: BillingPlan, seatCount: number): Promise<Subscription> {
+  async upsertSubscription(
+    organizationId: string,
+    plan: BillingPlan,
+    seatCount: number,
+  ): Promise<Subscription> {
     const now = new Date();
     const periodEnd = new Date(now);
     periodEnd.setMonth(periodEnd.getMonth() + 1);
@@ -38,6 +42,7 @@ export class MemoryBillingRepository implements BillingRepository {
     return updated;
   }
 
-  clear(): void { this.store.clear(); }
+  clear(): void {
+    this.store.clear();
+  }
 }
-

@@ -2,7 +2,12 @@ import { generateId } from '../../lib/id.js';
 import { paginate, offsetFromPage, sortItems } from '../../lib/pagination.js';
 import { overlaps } from '../../lib/types.js';
 import type { AmenityRepository } from './repository.js';
-import type { Amenity, AmenityReservation, CreateAmenityInput, CreateReservationInput } from './types.js';
+import type {
+  Amenity,
+  AmenityReservation,
+  CreateAmenityInput,
+  CreateReservationInput,
+} from './types.js';
 
 export class MemoryAmenityRepository implements AmenityRepository {
   private readonly amenities = new Map<string, Amenity>();
@@ -38,7 +43,12 @@ export class MemoryAmenityRepository implements AmenityRepository {
     const all = [...this.amenities.values()].filter((a) => a.organizationId === organizationId);
     const sorted = sortItems(all, query.sortBy as keyof Amenity, query.sortOrder);
     const offset = offsetFromPage(query.page, query.limit);
-    return paginate(sorted.slice(offset, offset + query.limit), query.page, query.limit, all.length);
+    return paginate(
+      sorted.slice(offset, offset + query.limit),
+      query.page,
+      query.limit,
+      all.length,
+    );
   }
 
   async createReservation(input: CreateReservationInput): Promise<AmenityReservation> {
@@ -58,7 +68,12 @@ export class MemoryAmenityRepository implements AmenityRepository {
     return reservation;
   }
 
-  async findReservations(organizationId: string, amenityId: string, startTime: Date, endTime: Date): Promise<AmenityReservation[]> {
+  async findReservations(
+    organizationId: string,
+    amenityId: string,
+    startTime: Date,
+    endTime: Date,
+  ): Promise<AmenityReservation[]> {
     return [...this.reservations.values()].filter(
       (r) =>
         r.organizationId === organizationId &&
@@ -67,7 +82,12 @@ export class MemoryAmenityRepository implements AmenityRepository {
     );
   }
 
-  async countOccupancy(organizationId: string, amenityId: string, startTime: Date, endTime: Date): Promise<number> {
+  async countOccupancy(
+    organizationId: string,
+    amenityId: string,
+    startTime: Date,
+    endTime: Date,
+  ): Promise<number> {
     const reservations = await this.findReservations(organizationId, amenityId, startTime, endTime);
     return reservations.reduce((sum, r) => sum + r.partySize, 0);
   }

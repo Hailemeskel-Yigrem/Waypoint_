@@ -18,7 +18,14 @@ export type UserRole = (typeof USER_ROLES)[number];
 export const INVOICE_STATUSES = ['draft', 'sent', 'paid', 'overdue', 'void'] as const;
 export type InvoiceStatus = (typeof INVOICE_STATUSES)[number];
 
-export const AMENITY_TYPES = ['parking', 'locker', 'gym', 'cafe', 'shower', 'bike_storage'] as const;
+export const AMENITY_TYPES = [
+  'parking',
+  'locker',
+  'gym',
+  'cafe',
+  'shower',
+  'bike_storage',
+] as const;
 export type AmenityType = (typeof AMENITY_TYPES)[number];
 
 export const WEBHOOK_EVENTS = [

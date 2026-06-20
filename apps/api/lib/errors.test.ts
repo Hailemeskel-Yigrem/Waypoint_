@@ -20,4 +20,3 @@ describe('AppError', () => {
     expect(err.statusCode).toBe(402);
   });
 });
-

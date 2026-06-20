@@ -1,5 +1,10 @@
 import type { FastifyInstance } from 'fastify';
-import { FeatureFlagService, MemoryFeatureFlagRepository, createFeatureFlagSchema, featureFlagsFilterSchema } from '@waypoint/domain';
+import {
+  FeatureFlagService,
+  MemoryFeatureFlagRepository,
+  createFeatureFlagSchema,
+  featureFlagsFilterSchema,
+} from '@waypoint/domain';
 
 export async function featureFlagsRoutes(app: FastifyInstance): Promise<void> {
   const service = new FeatureFlagService(new MemoryFeatureFlagRepository());

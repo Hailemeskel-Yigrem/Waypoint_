@@ -55,12 +55,19 @@ export class MemoryDeskRepository implements DeskRepository {
     if (query.spaceId) all = all.filter((d) => d.spaceId === query.spaceId);
     const sorted = sortItems(all, query.sortBy as keyof Desk, query.sortOrder);
     const offset = offsetFromPage(query.page, query.limit);
-    return paginate(sorted.slice(offset, offset + query.limit), query.page, query.limit, all.length);
+    return paginate(
+      sorted.slice(offset, offset + query.limit),
+      query.page,
+      query.limit,
+      all.length,
+    );
   }
 
   async count(organizationId: string): Promise<number> {
     return [...this.store.values()].filter((d) => d.organizationId === organizationId).length;
   }
 
-  clear(): void { this.store.clear(); }
+  clear(): void {
+    this.store.clear();
+  }
 }

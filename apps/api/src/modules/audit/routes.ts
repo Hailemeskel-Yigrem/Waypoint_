@@ -1,5 +1,10 @@
 import type { FastifyInstance } from 'fastify';
-import { AuditEventService, MemoryAuditEventRepository, createAuditEventSchema, auditFilterSchema } from '@waypoint/domain';
+import {
+  AuditEventService,
+  MemoryAuditEventRepository,
+  createAuditEventSchema,
+  auditFilterSchema,
+} from '@waypoint/domain';
 
 export async function auditRoutes(app: FastifyInstance): Promise<void> {
   const service = new AuditEventService(new MemoryAuditEventRepository());

@@ -4,7 +4,9 @@ import { MemoryOrganizationRepository } from '../../src/modules/organizations/me
 
 describe('OrganizationService', () => {
   let service: OrganizationService;
-  beforeEach(() => { service = new OrganizationService(new MemoryOrganizationRepository()); });
+  beforeEach(() => {
+    service = new OrganizationService(new MemoryOrganizationRepository());
+  });
 
   it('creates organization', async () => {
     const result = await service.create({ name: 'Waypoint HQ', slug: 'waypoint-hq' });
@@ -18,4 +20,3 @@ describe('OrganizationService', () => {
     expect(result.ok).toBe(false);
   });
 });
-

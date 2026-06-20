@@ -15,7 +15,14 @@ describe('SpaceService', () => {
   beforeEach(async () => {
     const orgRepo = new MemoryOrganizationRepository();
     orgId = (await orgRepo.create({ name: 'O', slug: 'o' })).id;
-    const billing = new BillingService(new MemoryBillingRepository(), orgRepo, new MemoryUserRepository(), new MemorySpaceRepository(), new MemoryDeskRepository(), new MemoryBookingRepository());
+    const billing = new BillingService(
+      new MemoryBillingRepository(),
+      orgRepo,
+      new MemoryUserRepository(),
+      new MemorySpaceRepository(),
+      new MemoryDeskRepository(),
+      new MemoryBookingRepository(),
+    );
     service = new SpaceService(new MemorySpaceRepository(), billing);
   });
 
@@ -24,4 +31,3 @@ describe('SpaceService', () => {
     expect(result.ok).toBe(true);
   });
 });
-

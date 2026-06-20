@@ -37,10 +37,18 @@ export class MemoryAccessPolicyRepository implements AccessPolicyRepository {
     const all = [...this.store.values()].filter((p) => p.organizationId === organizationId);
     const sorted = sortItems(all, query.sortBy as keyof AccessPolicy, query.sortOrder);
     const offset = offsetFromPage(query.page, query.limit);
-    return paginate(sorted.slice(offset, offset + query.limit), query.page, query.limit, all.length);
+    return paginate(
+      sorted.slice(offset, offset + query.limit),
+      query.page,
+      query.limit,
+      all.length,
+    );
   }
 
-  async findByAction(organizationId: string, action: AccessPolicy['action']): Promise<AccessPolicy[]> {
+  async findByAction(
+    organizationId: string,
+    action: AccessPolicy['action'],
+  ): Promise<AccessPolicy[]> {
     return [...this.store.values()]
       .filter((p) => p.organizationId === organizationId && p.action === action && p.isActive)
       .sort((a, b) => a.priority - b.priority);
@@ -50,7 +58,9 @@ export class MemoryAccessPolicyRepository implements AccessPolicyRepository {
     return this.store.delete(this.key(organizationId, id));
   }
 
-  clear(): void { this.store.clear(); }
+  clear(): void {
+    this.store.clear();
+  }
 }
 
 function matchesConditions(policy: AccessPolicy, ctx: AccessEvaluationContext): boolean {

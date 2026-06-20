@@ -1,1 +1,6 @@
-export type { Building, CreateBuildingInput, UpdateBuildingInput, BuildingFilter } from '@waypoint/domain';
+export type {
+  Building,
+  CreateBuildingInput,
+  UpdateBuildingInput,
+  BuildingFilter,
+} from '@waypoint/domain';

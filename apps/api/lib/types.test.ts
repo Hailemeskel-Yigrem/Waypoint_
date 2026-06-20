@@ -22,4 +22,3 @@ describe('shared types helpers', () => {
     expect(BILLING_LIMITS.enterprise.maxSpaces).toBeGreaterThan(100);
   });
 });
-

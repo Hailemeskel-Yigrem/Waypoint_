@@ -1,7 +1,11 @@
 import type { Pool } from 'pg';
 import type { DatabaseClient } from '../plugins/database.js';
 import type { OrganizationRepository } from '../modules/organizations/repository.js';
-import type { Organization, CreateOrganizationInput, UpdateOrganizationInput } from '../modules/organizations/types.js';
+import type {
+  Organization,
+  CreateOrganizationInput,
+  UpdateOrganizationInput,
+} from '../modules/organizations/types.js';
 import type { PaginationQuery, PaginatedResult } from '../lib/pagination.js';
 
 /**
@@ -22,10 +26,9 @@ export class PostgresOrganizationRepository implements OrganizationRepository {
   }
 
   async findById(id: string): Promise<Organization | null> {
-    const result = await this.db.query<Organization>(
-      'SELECT * FROM organizations WHERE id = $1',
-      [id],
-    );
+    const result = await this.db.query<Organization>('SELECT * FROM organizations WHERE id = $1', [
+      id,
+    ]);
     return result.rows[0] ?? null;
   }
 
@@ -67,7 +70,9 @@ export class PostgresOrganizationRepository implements OrganizationRepository {
 
   async list(query: PaginationQuery): Promise<PaginatedResult<Organization>> {
     const offset = (query.page - 1) * query.limit;
-    const countResult = await this.db.query<{ count: string }>('SELECT COUNT(*)::text AS count FROM organizations');
+    const countResult = await this.db.query<{ count: string }>(
+      'SELECT COUNT(*)::text AS count FROM organizations',
+    );
     const total = parseInt(countResult.rows[0]?.count ?? '0', 10);
     const result = await this.db.query<Organization>(
       `SELECT * FROM organizations ORDER BY created_at ${query.sortOrder === 'asc' ? 'ASC' : 'DESC'}
@@ -92,7 +97,9 @@ export class PostgresOrganizationRepository implements OrganizationRepository {
   }
 }
 
-export function createPoolRepositories(db: DatabaseClient): { organizations: OrganizationRepository } {
+export function createPoolRepositories(db: DatabaseClient): {
+  organizations: OrganizationRepository;
+} {
   return {
     organizations: new PostgresOrganizationRepository(db),
   };

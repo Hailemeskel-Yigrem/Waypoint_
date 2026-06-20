@@ -9,4 +9,3 @@ describe('MemoryBillingRepository', () => {
     expect(await repo.getSubscription('o1')).not.toBeNull();
   });
 });
-

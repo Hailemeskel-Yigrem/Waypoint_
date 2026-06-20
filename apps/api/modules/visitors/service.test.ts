@@ -13,35 +13,44 @@ describe('VisitorService', () => {
     const orgRepo = new MemoryOrganizationRepository();
     orgId = (await orgRepo.create({ name: 'O', slug: 'vis' })).id;
     const userRepo = new MemoryUserRepository();
-    hostId = (await userRepo.create({ organizationId: orgId, email: 'host@t.com', name: 'Host' })).id;
+    hostId = (await userRepo.create({ organizationId: orgId, email: 'host@t.com', name: 'Host' }))
+      .id;
     await userRepo.update(orgId, hostId, { status: 'active' });
     service = new VisitorService(new MemoryVisitorRepository(), userRepo, orgRepo);
   });
 
   it('requires active host', async () => {
     const result = await service.create(orgId, {
-      hostUserId: 'missing', name: 'Guest', expectedArrival: new Date('2026-04-01T10:00:00Z'),
+      hostUserId: 'missing',
+      name: 'Guest',
+      expectedArrival: new Date('2026-04-01T10:00:00Z'),
     });
     expect(result.ok).toBe(false);
   });
 
   it('creates visitor with check-in window', async () => {
     const result = await service.create(orgId, {
-      hostUserId: hostId, name: 'Guest', expectedArrival: new Date('2026-04-01T10:00:00Z'),
+      hostUserId: hostId,
+      name: 'Guest',
+      expectedArrival: new Date('2026-04-01T10:00:00Z'),
     });
     expect(result.ok).toBe(true);
     if (result.ok) {
-      expect(result.value.checkInWindowStart.getTime()).toBeLessThan(result.value.expectedArrival.getTime());
+      expect(result.value.checkInWindowStart.getTime()).toBeLessThan(
+        result.value.expectedArrival.getTime(),
+      );
     }
   });
 
   it('rejects check-in outside window', async () => {
     const created = await service.create(orgId, {
-      hostUserId: hostId, name: 'Guest', expectedArrival: new Date('2026-04-01T10:00:00Z'), checkInWindowMinutes: 15,
+      hostUserId: hostId,
+      name: 'Guest',
+      expectedArrival: new Date('2026-04-01T10:00:00Z'),
+      checkInWindowMinutes: 15,
     });
     const visitorId = created.ok ? created.value.id : '';
     const checkIn = await service.checkIn(orgId, visitorId);
     expect(checkIn.ok).toBe(false);
   });
 });
-

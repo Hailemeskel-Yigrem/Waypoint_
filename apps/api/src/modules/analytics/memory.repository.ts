@@ -1,5 +1,11 @@
 import type { AnalyticsRepository } from './repository.js';
-import type { DashboardSummary, AnalyticsQuery, OccupancyMetrics, VisitorMetrics, BookingMetrics } from './types.js';
+import type {
+  DashboardSummary,
+  AnalyticsQuery,
+  OccupancyMetrics,
+  VisitorMetrics,
+  BookingMetrics,
+} from './types.js';
 import type { DeskRepository } from '../desks/repository.js';
 import type { BookingRepository } from '../bookings/repository.js';
 import type { VisitorRepository } from '../visitors/repository.js';
@@ -17,13 +23,14 @@ export class AnalyticsDataRepository implements AnalyticsRepository {
 
   async getOccupancy(query: AnalyticsQuery): Promise<OccupancyMetrics> {
     const totalDesks = await this.desks.count(query.organizationId);
-    const bookingResult = await this.bookings.list(query.organizationId, { page: 1, limit: 1000, sortOrder: 'desc' });
+    const bookingResult = await this.bookings.list(query.organizationId, {
+      page: 1,
+      limit: 1000,
+      sortOrder: 'desc',
+    });
     const activeBookings = bookingResult.items.filter(
       (b) =>
-        b.status !== 'cancelled' &&
-        b.deskId &&
-        b.startTime <= query.to &&
-        b.endTime >= query.from,
+        b.status !== 'cancelled' && b.deskId && b.startTime <= query.to && b.endTime >= query.from,
     );
     const uniqueDesks = new Set(activeBookings.map((b) => b.deskId));
     const bookedDesks = uniqueDesks.size;
@@ -37,12 +44,18 @@ export class AnalyticsDataRepository implements AnalyticsRepository {
   }
 
   async getVisitorMetrics(query: AnalyticsQuery): Promise<VisitorMetrics> {
-    const result = await this.visitors.list(query.organizationId, { page: 1, limit: 1000, sortOrder: 'desc' });
+    const result = await this.visitors.list(query.organizationId, {
+      page: 1,
+      limit: 1000,
+      sortOrder: 'desc',
+    });
     const inRange = result.items.filter(
       (v) => v.expectedArrival >= query.from && v.expectedArrival <= query.to,
     );
     const expected = inRange.length;
-    const checkedIn = inRange.filter((v) => v.status === 'checked_in' || v.status === 'checked_out').length;
+    const checkedIn = inRange.filter(
+      (v) => v.status === 'checked_in' || v.status === 'checked_out',
+    ).length;
     const noShow = inRange.filter((v) => v.status === 'no_show').length;
     return {
       organizationId: query.organizationId,
@@ -55,7 +68,11 @@ export class AnalyticsDataRepository implements AnalyticsRepository {
   }
 
   async getBookingMetrics(query: AnalyticsQuery): Promise<BookingMetrics> {
-    const result = await this.bookings.list(query.organizationId, { page: 1, limit: 1000, sortOrder: 'desc' });
+    const result = await this.bookings.list(query.organizationId, {
+      page: 1,
+      limit: 1000,
+      sortOrder: 'desc',
+    });
     const inRange = result.items.filter(
       (b) => b.startTime >= query.from && b.startTime <= query.to,
     );

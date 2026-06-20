@@ -10,4 +10,3 @@ describe('MemorySpaceRepository', () => {
     expect(await repo.count('o1')).toBe(2);
   });
 });
-

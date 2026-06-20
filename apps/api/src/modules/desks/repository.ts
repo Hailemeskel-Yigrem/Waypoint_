@@ -7,6 +7,9 @@ export interface DeskRepository {
   findBySpace(organizationId: string, spaceId: string): Promise<Desk[]>;
   update(organizationId: string, id: string, input: UpdateDeskInput): Promise<Desk | null>;
   delete(organizationId: string, id: string): Promise<boolean>;
-  list(organizationId: string, query: PaginationQuery & { spaceId?: string }): Promise<PaginatedResult<Desk>>;
+  list(
+    organizationId: string,
+    query: PaginationQuery & { spaceId?: string },
+  ): Promise<PaginatedResult<Desk>>;
   count(organizationId: string): Promise<number>;
 }

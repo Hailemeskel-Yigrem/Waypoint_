@@ -9,4 +9,3 @@ describe('MemoryUserRepository tenant scoping', () => {
     expect(await repo.findById('org1', user.id)).not.toBeNull();
   });
 });
-

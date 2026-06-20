@@ -3,10 +3,7 @@ import { withRetry, SimpleCircuitBreaker } from './circuitBreaker.js';
 
 describe('shared utils/circuitBreaker', () => {
   it('retries failed operations', async () => {
-    const fn = vi
-      .fn()
-      .mockRejectedValueOnce(new Error('temp'))
-      .mockResolvedValueOnce('ok');
+    const fn = vi.fn().mockRejectedValueOnce(new Error('temp')).mockResolvedValueOnce('ok');
     await expect(withRetry(fn, { retries: 2, baseMs: 1 })).resolves.toBe('ok');
   });
 

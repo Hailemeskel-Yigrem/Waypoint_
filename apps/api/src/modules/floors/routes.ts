@@ -1,5 +1,10 @@
 import type { FastifyInstance } from 'fastify';
-import { FloorService, MemoryFloorRepository, createFloorSchema, floorsFilterSchema } from '@waypoint/domain';
+import {
+  FloorService,
+  MemoryFloorRepository,
+  createFloorSchema,
+  floorsFilterSchema,
+} from '@waypoint/domain';
 
 export async function floorsRoutes(app: FastifyInstance): Promise<void> {
   const service = new FloorService(new MemoryFloorRepository());

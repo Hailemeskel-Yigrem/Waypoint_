@@ -21,20 +21,23 @@ export interface ConfigGuardEngineResult {
 }
 
 export class ConfigGuardEngine {
-
   processCfgGuard1(input: ConfigGuardEngineInput): ConfigGuardEngineResult {
     const issues: string[] = [];
     if (!input.organizationId) issues.push('organizationId');
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_1_FAIL' : 'CfgGuard_1_OK',
@@ -48,13 +51,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_2_FAIL' : 'CfgGuard_2_OK',
@@ -68,13 +75,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_3_FAIL' : 'CfgGuard_3_OK',
@@ -88,13 +99,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_4_FAIL' : 'CfgGuard_4_OK',
@@ -108,13 +123,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_5_FAIL' : 'CfgGuard_5_OK',
@@ -128,13 +147,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_6_FAIL' : 'CfgGuard_6_OK',
@@ -148,13 +171,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_7_FAIL' : 'CfgGuard_7_OK',
@@ -168,13 +195,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_8_FAIL' : 'CfgGuard_8_OK',
@@ -188,13 +219,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_9_FAIL' : 'CfgGuard_9_OK',
@@ -208,13 +243,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_10_FAIL' : 'CfgGuard_10_OK',
@@ -228,13 +267,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_11_FAIL' : 'CfgGuard_11_OK',
@@ -248,13 +291,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_12_FAIL' : 'CfgGuard_12_OK',
@@ -268,13 +315,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_13_FAIL' : 'CfgGuard_13_OK',
@@ -288,13 +339,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_14_FAIL' : 'CfgGuard_14_OK',
@@ -308,13 +363,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_15_FAIL' : 'CfgGuard_15_OK',
@@ -328,13 +387,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_16_FAIL' : 'CfgGuard_16_OK',
@@ -348,13 +411,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_17_FAIL' : 'CfgGuard_17_OK',
@@ -368,13 +435,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_18_FAIL' : 'CfgGuard_18_OK',
@@ -388,13 +459,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_19_FAIL' : 'CfgGuard_19_OK',
@@ -408,13 +483,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_20_FAIL' : 'CfgGuard_20_OK',
@@ -428,13 +507,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_21_FAIL' : 'CfgGuard_21_OK',
@@ -448,13 +531,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_22_FAIL' : 'CfgGuard_22_OK',
@@ -468,13 +555,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_23_FAIL' : 'CfgGuard_23_OK',
@@ -488,13 +579,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_24_FAIL' : 'CfgGuard_24_OK',
@@ -508,13 +603,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_25_FAIL' : 'CfgGuard_25_OK',
@@ -528,13 +627,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_26_FAIL' : 'CfgGuard_26_OK',
@@ -548,13 +651,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_27_FAIL' : 'CfgGuard_27_OK',
@@ -568,13 +675,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_28_FAIL' : 'CfgGuard_28_OK',
@@ -588,13 +699,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_29_FAIL' : 'CfgGuard_29_OK',
@@ -608,13 +723,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_30_FAIL' : 'CfgGuard_30_OK',
@@ -628,13 +747,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_31_FAIL' : 'CfgGuard_31_OK',
@@ -648,13 +771,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_32_FAIL' : 'CfgGuard_32_OK',
@@ -668,13 +795,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_33_FAIL' : 'CfgGuard_33_OK',
@@ -688,13 +819,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_34_FAIL' : 'CfgGuard_34_OK',
@@ -708,13 +843,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_35_FAIL' : 'CfgGuard_35_OK',
@@ -728,13 +867,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_36_FAIL' : 'CfgGuard_36_OK',
@@ -748,13 +891,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_37_FAIL' : 'CfgGuard_37_OK',
@@ -768,13 +915,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_38_FAIL' : 'CfgGuard_38_OK',
@@ -788,13 +939,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_39_FAIL' : 'CfgGuard_39_OK',
@@ -808,13 +963,17 @@ export class ConfigGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'CfgGuard_40_FAIL' : 'CfgGuard_40_OK',
@@ -868,7 +1027,11 @@ export class ConfigGuardEngine {
     ];
   }
 
-  summarize(results: ConfigGuardEngineResult[]): { passed: number; failed: number; avgScore: number } {
+  summarize(results: ConfigGuardEngineResult[]): {
+    passed: number;
+    failed: number;
+    avgScore: number;
+  } {
     const passed = results.filter((r) => r.ok).length;
     const failed = results.length - passed;
     const avgScore = results.reduce((a, b) => a + b.score, 0) / (results.length || 1);

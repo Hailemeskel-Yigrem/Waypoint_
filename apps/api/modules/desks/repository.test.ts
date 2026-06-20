@@ -9,4 +9,3 @@ describe('MemoryDeskRepository', () => {
     expect((await repo.findBySpace('o1', 's1')).length).toBe(1);
   });
 });
-

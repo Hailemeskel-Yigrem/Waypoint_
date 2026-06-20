@@ -3,10 +3,7 @@ import { withRetry, SimpleIcal } from './ical.js';
 
 describe('shared utils/ical', () => {
   it('retries failed operations', async () => {
-    const fn = vi
-      .fn()
-      .mockRejectedValueOnce(new Error('temp'))
-      .mockResolvedValueOnce('ok');
+    const fn = vi.fn().mockRejectedValueOnce(new Error('temp')).mockResolvedValueOnce('ok');
     await expect(withRetry(fn, { retries: 2, baseMs: 1 })).resolves.toBe('ok');
   });
 

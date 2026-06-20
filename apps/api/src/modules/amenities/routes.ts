@@ -13,10 +13,16 @@ export function registerAmenityRoutes(app: FastifyInstance): void {
     scoped.addHook('preHandler', app.authHook);
     scoped.addHook('preHandler', tenantMiddleware);
 
-    scoped.post('/amenities', { preHandler: requireRole('owner', 'admin', 'manager') }, async (request, reply) => {
-      const body = createAmenitySchema.parse(request.body);
-      reply.status(201).send({ data: throwIfError(await service.create(request.tenantId, body)) });
-    });
+    scoped.post(
+      '/amenities',
+      { preHandler: requireRole('owner', 'admin', 'manager') },
+      async (request, reply) => {
+        const body = createAmenitySchema.parse(request.body);
+        reply
+          .status(201)
+          .send({ data: throwIfError(await service.create(request.tenantId, body)) });
+      },
+    );
 
     scoped.get('/amenities', async (request, reply) => {
       const query = paginationQuerySchema.parse(request.query);

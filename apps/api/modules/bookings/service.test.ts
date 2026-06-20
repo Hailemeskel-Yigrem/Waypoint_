@@ -22,11 +22,19 @@ describe('BookingService overlap rules', () => {
     const userRepo = new MemoryUserRepository();
     userId = (await userRepo.create({ organizationId: orgId, email: 'u@t.com', name: 'U' })).id;
     const spaceRepo = new MemorySpaceRepository();
-    const spaceId = (await spaceRepo.create({ organizationId: orgId, name: 'S', type: 'office' })).id;
+    const spaceId = (await spaceRepo.create({ organizationId: orgId, name: 'S', type: 'office' }))
+      .id;
     const deskRepo = new MemoryDeskRepository();
     deskId = (await deskRepo.create({ organizationId: orgId, spaceId, label: 'D1' })).id;
     const bookingRepo = new MemoryBookingRepository();
-    const billing = new BillingService(new MemoryBillingRepository(), orgRepo, userRepo, spaceRepo, deskRepo, bookingRepo);
+    const billing = new BillingService(
+      new MemoryBillingRepository(),
+      orgRepo,
+      userRepo,
+      spaceRepo,
+      deskRepo,
+      bookingRepo,
+    );
     const access = new AccessService(new MemoryAccessPolicyRepository(), userRepo);
     service = new BookingService(bookingRepo, deskRepo, spaceRepo, billing, access);
   });
@@ -34,10 +42,16 @@ describe('BookingService overlap rules', () => {
   it('creates non-overlapping bookings', async () => {
     const start = new Date('2026-02-01T09:00:00Z');
     const end = new Date('2026-02-01T11:00:00Z');
-    const r1 = await service.create(orgId, userId, { deskId, title: 'Morning', startTime: start, endTime: end });
+    const r1 = await service.create(orgId, userId, {
+      deskId,
+      title: 'Morning',
+      startTime: start,
+      endTime: end,
+    });
     expect(r1.ok).toBe(true);
     const r2 = await service.create(orgId, userId, {
-      deskId, title: 'Afternoon',
+      deskId,
+      title: 'Afternoon',
       startTime: new Date('2026-02-01T12:00:00Z'),
       endTime: new Date('2026-02-01T14:00:00Z'),
     });
@@ -49,7 +63,8 @@ describe('BookingService overlap rules', () => {
     const end = new Date('2026-03-01T12:00:00Z');
     await service.create(orgId, userId, { deskId, title: 'First', startTime: start, endTime: end });
     const overlap = await service.create(orgId, userId, {
-      deskId, title: 'Overlap',
+      deskId,
+      title: 'Overlap',
       startTime: new Date('2026-03-01T11:00:00Z'),
       endTime: new Date('2026-03-01T13:00:00Z'),
     });
@@ -57,4 +72,3 @@ describe('BookingService overlap rules', () => {
     if (!overlap.ok) expect(overlap.error.code).toBe('BOOKING_OVERLAP');
   });
 });
-

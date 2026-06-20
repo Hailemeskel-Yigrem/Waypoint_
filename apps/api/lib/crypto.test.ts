@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { hashPassword, verifyPassword, signPayload, verifySignature, generateToken } from '../../src/lib/crypto.js';
+import {
+  hashPassword,
+  verifyPassword,
+  signPayload,
+  verifySignature,
+  generateToken,
+} from '../../src/lib/crypto.js';
 
 describe('crypto', () => {
   it('hashes and verifies passwords', () => {
@@ -17,4 +23,3 @@ describe('crypto', () => {
     expect(generateToken()).toHaveLength(43);
   });
 });
-

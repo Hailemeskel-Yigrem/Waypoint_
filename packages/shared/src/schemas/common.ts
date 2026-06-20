@@ -3,7 +3,11 @@ import { MAX_PAGE_SIZE, DEFAULT_PAGE_SIZE } from '../constants/index.js';
 
 export const entityIdSchema = z.string().uuid();
 export const emailSchema = z.string().email().max(255);
-export const slugSchema = z.string().min(2).max(64).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+export const slugSchema = z
+  .string()
+  .min(2)
+  .max(64)
+  .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 export const isoDateSchema = z.string().datetime();
 
 export const paginationSchema = z.object({

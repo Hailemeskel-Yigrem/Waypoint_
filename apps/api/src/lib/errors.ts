@@ -65,7 +65,12 @@ export class AppError extends Error {
   }
 
   static bookingOverlap(details?: Record<string, unknown>): AppError {
-    return new AppError('BOOKING_OVERLAP', 'Booking overlaps with an existing reservation', 409, details);
+    return new AppError(
+      'BOOKING_OVERLAP',
+      'Booking overlaps with an existing reservation',
+      409,
+      details,
+    );
   }
 
   static accessDenied(message = 'Access denied by policy'): AppError {

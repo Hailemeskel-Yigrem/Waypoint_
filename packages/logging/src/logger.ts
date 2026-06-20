@@ -18,16 +18,32 @@ export interface Logger {
 
 type Writer = (line: string) => void;
 
-export function createLogger(options: LoggerOptions = {}, writer: Writer = (line) => console.log(line)): Logger {
+export function createLogger(
+  options: LoggerOptions = {},
+  writer: Writer = (line) => console.log(line),
+): Logger {
   const levelName = options.level ?? parseLogLevel(process.env.LOG_LEVEL ?? 'info');
   const minLevel = LogLevels[levelName];
   const service = options.service;
   const bindings = options.bindings ?? {};
 
-  const log = (level: LogLevelName, message: string, meta?: Record<string, unknown>, error?: Error) => {
+  const log = (
+    level: LogLevelName,
+    message: string,
+    meta?: Record<string, unknown>,
+    error?: Error,
+  ) => {
     if (!shouldLog(minLevel, LogLevels[level])) return;
     const merged = { ...bindings, ...meta };
-    writer(serializeLogEntry(level, message, Object.keys(merged).length ? merged : undefined, service, error));
+    writer(
+      serializeLogEntry(
+        level,
+        message,
+        Object.keys(merged).length ? merged : undefined,
+        service,
+        error,
+      ),
+    );
   };
 
   return {
@@ -37,6 +53,9 @@ export function createLogger(options: LoggerOptions = {}, writer: Writer = (line
     error: (m, meta, err) => log('error', m, meta, err),
     fatal: (m, meta, err) => log('fatal', m, meta, err),
     child: (childBindings) =>
-      createLogger({ service, level: levelName, bindings: { ...bindings, ...childBindings } }, writer),
+      createLogger(
+        { service, level: levelName, bindings: { ...bindings, ...childBindings } },
+        writer,
+      ),
   };
 }

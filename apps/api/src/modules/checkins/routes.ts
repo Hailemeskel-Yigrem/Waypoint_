@@ -1,5 +1,10 @@
 import type { FastifyInstance } from 'fastify';
-import { CheckInService, MemoryCheckInRepository, createCheckInSchema, checkinsFilterSchema } from '@waypoint/domain';
+import {
+  CheckInService,
+  MemoryCheckInRepository,
+  createCheckInSchema,
+  checkinsFilterSchema,
+} from '@waypoint/domain';
 
 export async function checkinsRoutes(app: FastifyInstance): Promise<void> {
   const service = new CheckInService(new MemoryCheckInRepository());

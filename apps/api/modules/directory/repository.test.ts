@@ -10,4 +10,3 @@ describe('MemoryDirectoryRepository search', () => {
     expect(results.items).toHaveLength(0);
   });
 });
-

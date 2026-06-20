@@ -25,7 +25,11 @@ export class BillingService {
     if (!sub) {
       const org = await this.orgRepo.findById(organizationId);
       if (!org) return err(AppError.notFound('Organization', organizationId));
-      sub = await this.repo.upsertSubscription(organizationId, org.plan, BILLING_LIMITS[org.plan].maxSeats);
+      sub = await this.repo.upsertSubscription(
+        organizationId,
+        org.plan,
+        BILLING_LIMITS[org.plan].maxSeats,
+      );
     }
     return ok(sub);
   }
@@ -46,7 +50,9 @@ export class BillingService {
     const usage = await this.getUsage(organizationId);
     const limits = BILLING_LIMITS[sub.value.plan];
     if (usage.activeSeats >= limits.maxSeats) {
-      return err(AppError.billingLimit('Seat limit reached for current plan', { limit: limits.maxSeats }));
+      return err(
+        AppError.billingLimit('Seat limit reached for current plan', { limit: limits.maxSeats }),
+      );
     }
     return ok(undefined);
   }
@@ -57,7 +63,9 @@ export class BillingService {
     const count = await this.spaceRepo.count(organizationId);
     const limits = BILLING_LIMITS[sub.value.plan];
     if (count >= limits.maxSpaces) {
-      return err(AppError.billingLimit('Space limit reached for current plan', { limit: limits.maxSpaces }));
+      return err(
+        AppError.billingLimit('Space limit reached for current plan', { limit: limits.maxSpaces }),
+      );
     }
     return ok(undefined);
   }
@@ -68,7 +76,9 @@ export class BillingService {
     const count = await this.deskRepo.count(organizationId);
     const limits = BILLING_LIMITS[sub.value.plan];
     if (count >= limits.maxDesks) {
-      return err(AppError.billingLimit('Desk limit reached for current plan', { limit: limits.maxDesks }));
+      return err(
+        AppError.billingLimit('Desk limit reached for current plan', { limit: limits.maxDesks }),
+      );
     }
     return ok(undefined);
   }
@@ -79,7 +89,11 @@ export class BillingService {
     const count = await this.bookingRepo.countThisMonth(organizationId);
     const limits = BILLING_LIMITS[sub.value.plan];
     if (count >= limits.maxBookingsPerMonth) {
-      return err(AppError.billingLimit('Monthly booking limit reached', { limit: limits.maxBookingsPerMonth }));
+      return err(
+        AppError.billingLimit('Monthly booking limit reached', {
+          limit: limits.maxBookingsPerMonth,
+        }),
+      );
     }
     return ok(undefined);
   }
@@ -91,4 +105,3 @@ export class BillingService {
     return ok(updated);
   }
 }
-

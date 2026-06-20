@@ -13,7 +13,10 @@ export class DeskService {
     private readonly billing: BillingService,
   ) {}
 
-  async create(organizationId: string, input: Omit<CreateDeskInput, 'organizationId'>): Promise<Result<Desk>> {
+  async create(
+    organizationId: string,
+    input: Omit<CreateDeskInput, 'organizationId'>,
+  ): Promise<Result<Desk>> {
     const space = await this.spaceRepo.findById(organizationId, input.spaceId);
     if (!space) return err(AppError.notFound('Space', input.spaceId));
 
@@ -42,7 +45,10 @@ export class DeskService {
     return ok(undefined);
   }
 
-  async list(organizationId: string, query: PaginationQuery & { spaceId?: string }): Promise<PaginatedResult<Desk>> {
+  async list(
+    organizationId: string,
+    query: PaginationQuery & { spaceId?: string },
+  ): Promise<PaginatedResult<Desk>> {
     return this.repo.list(organizationId, query);
   }
 }

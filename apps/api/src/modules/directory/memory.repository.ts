@@ -1,7 +1,11 @@
 import { generateId } from '../../lib/id.js';
 import { paginate, offsetFromPage, sortItems } from '../../lib/pagination.js';
 import type { DirectoryRepository } from './repository.js';
-import type { DirectoryEntry, CreateDirectoryEntryInput, UpdateDirectoryEntryInput } from './types.js';
+import type {
+  DirectoryEntry,
+  CreateDirectoryEntryInput,
+  UpdateDirectoryEntryInput,
+} from './types.js';
 
 export class MemoryDirectoryRepository implements DirectoryRepository {
   private readonly store = new Map<string, DirectoryEntry>();
@@ -35,7 +39,11 @@ export class MemoryDirectoryRepository implements DirectoryRepository {
     return e?.organizationId === organizationId ? e : null;
   }
 
-  async update(organizationId: string, id: string, input: UpdateDirectoryEntryInput): Promise<DirectoryEntry | null> {
+  async update(
+    organizationId: string,
+    id: string,
+    input: UpdateDirectoryEntryInput,
+  ): Promise<DirectoryEntry | null> {
     const existing = await this.findById(organizationId, id);
     if (!existing) return null;
     const updated: DirectoryEntry = {
@@ -74,8 +82,15 @@ export class MemoryDirectoryRepository implements DirectoryRepository {
 
     const sorted = sortItems(all, query.sortBy as keyof DirectoryEntry, query.sortOrder);
     const offset = offsetFromPage(query.page, query.limit);
-    return paginate(sorted.slice(offset, offset + query.limit), query.page, query.limit, all.length);
+    return paginate(
+      sorted.slice(offset, offset + query.limit),
+      query.page,
+      query.limit,
+      all.length,
+    );
   }
 
-  clear(): void { this.store.clear(); }
+  clear(): void {
+    this.store.clear();
+  }
 }

@@ -9,4 +9,3 @@ describe('MemoryOrganizationRepository', () => {
     expect(found?.name).toBe('X');
   });
 });
-

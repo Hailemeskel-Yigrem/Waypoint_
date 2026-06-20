@@ -1,4 +1,10 @@
-import type { DashboardSummary, AnalyticsQuery, OccupancyMetrics, VisitorMetrics, BookingMetrics } from './types.js';
+import type {
+  DashboardSummary,
+  AnalyticsQuery,
+  OccupancyMetrics,
+  VisitorMetrics,
+  BookingMetrics,
+} from './types.js';
 
 export interface AnalyticsRepository {
   getDashboard(query: AnalyticsQuery): Promise<DashboardSummary>;

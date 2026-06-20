@@ -20,10 +20,9 @@ export const updateBookingSchema = z
     status: z.enum(['pending', 'confirmed', 'checked_in', 'completed', 'cancelled']).optional(),
     notes: z.string().max(2000).nullable().optional(),
   })
-  .refine(
-    (d) => !d.startTime || !d.endTime || d.endTime > d.startTime,
-    { message: 'endTime must be after startTime' },
-  );
+  .refine((d) => !d.startTime || !d.endTime || d.endTime > d.startTime, {
+    message: 'endTime must be after startTime',
+  });
 
 export const bookingIdParamSchema = z.object({ bookingId: z.string().min(1) });
 

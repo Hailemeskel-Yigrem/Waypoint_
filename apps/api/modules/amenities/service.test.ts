@@ -13,9 +13,18 @@ describe('AmenityService capacity', () => {
     const orgRepo = new MemoryOrganizationRepository();
     orgId = (await orgRepo.create({ name: 'O', slug: 'amn' })).id;
     const spaceRepo = new MemorySpaceRepository();
-    const spaceId = (await spaceRepo.create({ organizationId: orgId, name: 'Gym', type: 'zone' })).id;
+    const spaceId = (await spaceRepo.create({ organizationId: orgId, name: 'Gym', type: 'zone' }))
+      .id;
     const amenityRepo = new MemoryAmenityRepository();
-    amenityId = (await amenityRepo.create({ organizationId: orgId, spaceId, name: 'Gym', type: 'gym', capacity: 2 })).id;
+    amenityId = (
+      await amenityRepo.create({
+        organizationId: orgId,
+        spaceId,
+        name: 'Gym',
+        type: 'gym',
+        capacity: 2,
+      })
+    ).id;
     service = new AmenityService(amenityRepo, spaceRepo);
   });
 
@@ -30,11 +39,15 @@ describe('AmenityService capacity', () => {
   });
 
   it('rejects when capacity exceeded', async () => {
-    const slot = { amenityId, startTime: new Date('2026-05-02T08:00:00Z'), endTime: new Date('2026-05-02T09:00:00Z'), partySize: 2 };
+    const slot = {
+      amenityId,
+      startTime: new Date('2026-05-02T08:00:00Z'),
+      endTime: new Date('2026-05-02T09:00:00Z'),
+      partySize: 2,
+    };
     await service.reserve(orgId, 'u1', slot);
     const result = await service.reserve(orgId, 'u2', { ...slot, partySize: 1 });
     expect(result.ok).toBe(false);
     if (!result.ok) expect(result.error.code).toBe('CAPACITY_EXCEEDED');
   });
 });
-

@@ -1,5 +1,10 @@
 import type { FastifyInstance } from 'fastify';
-import { BuildingService, MemoryBuildingRepository, createBuildingSchema, buildingsFilterSchema } from '@waypoint/domain';
+import {
+  BuildingService,
+  MemoryBuildingRepository,
+  createBuildingSchema,
+  buildingsFilterSchema,
+} from '@waypoint/domain';
 
 export async function buildingsRoutes(app: FastifyInstance): Promise<void> {
   const service = new BuildingService(new MemoryBuildingRepository());

@@ -20,4 +20,3 @@ describe('Result', () => {
     expect(result.ok).toBe(false);
   });
 });
-

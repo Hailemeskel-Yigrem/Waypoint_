@@ -2,7 +2,12 @@ import { generateId } from '../../lib/id.js';
 import { paginate, offsetFromPage, sortItems } from '../../lib/pagination.js';
 import { overlaps } from '../../lib/types.js';
 import type { BookingRepository } from './repository.js';
-import type { Booking, CreateBookingInput, UpdateBookingInput, BookingConflictQuery } from './types.js';
+import type {
+  Booking,
+  CreateBookingInput,
+  UpdateBookingInput,
+  BookingConflictQuery,
+} from './types.js';
 
 const ACTIVE_STATUSES = new Set(['pending', 'confirmed', 'checked_in']);
 
@@ -38,7 +43,11 @@ export class MemoryBookingRepository implements BookingRepository {
     return b?.organizationId === organizationId ? b : null;
   }
 
-  async update(organizationId: string, id: string, input: UpdateBookingInput): Promise<Booking | null> {
+  async update(
+    organizationId: string,
+    id: string,
+    input: UpdateBookingInput,
+  ): Promise<Booking | null> {
     const existing = await this.findById(organizationId, id);
     if (!existing) return null;
     const updated: Booking = { ...existing, ...input, updatedAt: new Date() };
@@ -57,7 +66,12 @@ export class MemoryBookingRepository implements BookingRepository {
     if (query.spaceId) all = all.filter((b) => b.spaceId === query.spaceId);
     const sorted = sortItems(all, query.sortBy as keyof Booking, query.sortOrder);
     const offset = offsetFromPage(query.page, query.limit);
-    return paginate(sorted.slice(offset, offset + query.limit), query.page, query.limit, all.length);
+    return paginate(
+      sorted.slice(offset, offset + query.limit),
+      query.page,
+      query.limit,
+      all.length,
+    );
   }
 
   async findConflicts(query: BookingConflictQuery): Promise<Booking[]> {
@@ -88,5 +102,7 @@ export class MemoryBookingRepository implements BookingRepository {
     ).length;
   }
 
-  clear(): void { this.store.clear(); }
+  clear(): void {
+    this.store.clear();
+  }
 }

@@ -17,4 +17,3 @@ describe('pagination', () => {
     expect(sortItems(items, 'n', 'asc').map((i) => i.n)).toEqual([1, 3]);
   });
 });
-

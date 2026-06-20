@@ -13,9 +13,17 @@ describe('DirectoryService', () => {
   });
 
   it('searches directory entries', async () => {
-    await service.create(orgId, { displayName: 'Jane Doe', email: 'jane@acme.test', department: 'Engineering' });
-    const result = await service.search(orgId, { page: 1, limit: 20, sortOrder: 'desc', q: 'jane' });
+    await service.create(orgId, {
+      displayName: 'Jane Doe',
+      email: 'jane@acme.test',
+      department: 'Engineering',
+    });
+    const result = await service.search(orgId, {
+      page: 1,
+      limit: 20,
+      sortOrder: 'desc',
+      q: 'jane',
+    });
     expect(result.items.length).toBe(1);
   });
 });
-

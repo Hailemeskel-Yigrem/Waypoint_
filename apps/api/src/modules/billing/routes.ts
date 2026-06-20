@@ -19,11 +19,14 @@ export function registerBillingRoutes(app: FastifyInstance): void {
       reply.send({ data: await service.getUsage(request.tenantId) });
     });
 
-    scoped.patch('/billing/subscription', { preHandler: requireRole('owner') }, async (request, reply) => {
-      const body = updateSubscriptionSchema.parse(request.body);
-      if (!body.plan) throw new Error('plan required');
-      reply.send({ data: throwIfError(await service.updatePlan(request.tenantId, body.plan)) });
-    });
+    scoped.patch(
+      '/billing/subscription',
+      { preHandler: requireRole('owner') },
+      async (request, reply) => {
+        const body = updateSubscriptionSchema.parse(request.body);
+        if (!body.plan) throw new Error('plan required');
+        reply.send({ data: throwIfError(await service.updatePlan(request.tenantId, body.plan)) });
+      },
+    );
   });
 }
-

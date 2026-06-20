@@ -18,27 +18,49 @@ describe('UserService', () => {
     const org = await orgRepo.create({ name: 'Test', slug: 'test' });
     orgId = org.id;
     const billing = new BillingService(
-      new MemoryBillingRepository(), orgRepo,
-      new MemoryUserRepository(), new MemorySpaceRepository(),
-      new MemoryDeskRepository(), new MemoryBookingRepository(),
+      new MemoryBillingRepository(),
+      orgRepo,
+      new MemoryUserRepository(),
+      new MemorySpaceRepository(),
+      new MemoryDeskRepository(),
+      new MemoryBookingRepository(),
     );
     service = new UserService(new MemoryUserRepository(), billing, 'test-secret-16chars!!', 'salt');
   });
 
   it('creates user with hashed password', async () => {
-    const result = await service.create(orgId, { email: 'a@test.com', name: 'A', password: 'password123' });
+    const result = await service.create(orgId, {
+      email: 'a@test.com',
+      name: 'A',
+      password: 'password123',
+    });
     expect(result.ok).toBe(true);
   });
 
   it('logs in active user', async () => {
     const repo = new MemoryUserRepository();
-    const billing = new BillingService(new MemoryBillingRepository(), new MemoryOrganizationRepository(), repo, new MemorySpaceRepository(), new MemoryDeskRepository(), new MemoryBookingRepository());
+    const billing = new BillingService(
+      new MemoryBillingRepository(),
+      new MemoryOrganizationRepository(),
+      repo,
+      new MemorySpaceRepository(),
+      new MemoryDeskRepository(),
+      new MemoryBookingRepository(),
+    );
     const svc = new UserService(repo, billing, 'test-secret-16chars!!', 'salt');
-    await repo.create({ organizationId: orgId, email: 'login@test.com', name: 'Login', passwordHash: hashPassword('password123') });
+    await repo.create({
+      organizationId: orgId,
+      email: 'login@test.com',
+      name: 'Login',
+      passwordHash: hashPassword('password123'),
+    });
     const user = await repo.findByEmail(orgId, 'login@test.com');
     await repo.update(orgId, user!.id, { status: 'active' });
-    const result = await svc.login({ organizationId: orgId, email: 'login@test.com', password: 'password123' });
+    const result = await svc.login({
+      organizationId: orgId,
+      email: 'login@test.com',
+      password: 'password123',
+    });
     expect(result.ok).toBe(true);
   });
 });
-

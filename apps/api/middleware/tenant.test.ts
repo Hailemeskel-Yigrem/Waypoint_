@@ -10,4 +10,3 @@ describe('tenant middleware helpers', () => {
     expect(filterByTenant('org1', items)).toHaveLength(1);
   });
 });
-

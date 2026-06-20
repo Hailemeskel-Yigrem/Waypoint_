@@ -21,20 +21,23 @@ export interface SharedGuardEngineResult {
 }
 
 export class SharedGuardEngine {
-
   processSharedGuard1(input: SharedGuardEngineInput): SharedGuardEngineResult {
     const issues: string[] = [];
     if (!input.organizationId) issues.push('organizationId');
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_1_FAIL' : 'SharedGuard_1_OK',
@@ -48,13 +51,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_2_FAIL' : 'SharedGuard_2_OK',
@@ -68,13 +75,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_3_FAIL' : 'SharedGuard_3_OK',
@@ -88,13 +99,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_4_FAIL' : 'SharedGuard_4_OK',
@@ -108,13 +123,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_5_FAIL' : 'SharedGuard_5_OK',
@@ -128,13 +147,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_6_FAIL' : 'SharedGuard_6_OK',
@@ -148,13 +171,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_7_FAIL' : 'SharedGuard_7_OK',
@@ -168,13 +195,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_8_FAIL' : 'SharedGuard_8_OK',
@@ -188,13 +219,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_9_FAIL' : 'SharedGuard_9_OK',
@@ -208,13 +243,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_10_FAIL' : 'SharedGuard_10_OK',
@@ -228,13 +267,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_11_FAIL' : 'SharedGuard_11_OK',
@@ -248,13 +291,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_12_FAIL' : 'SharedGuard_12_OK',
@@ -268,13 +315,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_13_FAIL' : 'SharedGuard_13_OK',
@@ -288,13 +339,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_14_FAIL' : 'SharedGuard_14_OK',
@@ -308,13 +363,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_15_FAIL' : 'SharedGuard_15_OK',
@@ -328,13 +387,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_16_FAIL' : 'SharedGuard_16_OK',
@@ -348,13 +411,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_17_FAIL' : 'SharedGuard_17_OK',
@@ -368,13 +435,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_18_FAIL' : 'SharedGuard_18_OK',
@@ -388,13 +459,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_19_FAIL' : 'SharedGuard_19_OK',
@@ -408,13 +483,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_20_FAIL' : 'SharedGuard_20_OK',
@@ -428,13 +507,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_21_FAIL' : 'SharedGuard_21_OK',
@@ -448,13 +531,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_22_FAIL' : 'SharedGuard_22_OK',
@@ -468,13 +555,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_23_FAIL' : 'SharedGuard_23_OK',
@@ -488,13 +579,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_24_FAIL' : 'SharedGuard_24_OK',
@@ -508,13 +603,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_25_FAIL' : 'SharedGuard_25_OK',
@@ -528,13 +627,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_26_FAIL' : 'SharedGuard_26_OK',
@@ -548,13 +651,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_27_FAIL' : 'SharedGuard_27_OK',
@@ -568,13 +675,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_28_FAIL' : 'SharedGuard_28_OK',
@@ -588,13 +699,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_29_FAIL' : 'SharedGuard_29_OK',
@@ -608,13 +723,17 @@ export class SharedGuardEngine {
     if (!input.actorId) issues.push('actorId');
     if (!input.resourceId) issues.push('resourceId');
     if (input.quantity !== undefined && input.quantity < 1) issues.push('quantity');
-    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start)) issues.push('range');
+    if (input.start && input.end && Date.parse(input.end) <= Date.parse(input.start))
+      issues.push('range');
     if (input.tags && input.tags.length > 20) issues.push('too many tags');
-    if (input.metadata && Object.keys(input.metadata).length > 50) issues.push('metadata too large');
-    if (input.flags?.maintenance && input.action === 'write') issues.push('maintenance blocks write');
+    if (input.metadata && Object.keys(input.metadata).length > 50)
+      issues.push('metadata too large');
+    if (input.flags?.maintenance && input.action === 'write')
+      issues.push('maintenance blocks write');
     if (input.flags?.readonly && input.action !== 'read') issues.push('readonly mode');
     if ((input.priority ?? 0) > 10) issues.push('priority out of range');
-    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel)) issues.push('bad channel');
+    if (input.channel && !['email', 'sms', 'push', 'slack'].includes(input.channel))
+      issues.push('bad channel');
     return {
       ok: issues.length === 0,
       code: issues.length ? 'SharedGuard_30_FAIL' : 'SharedGuard_30_OK',
@@ -658,7 +777,11 @@ export class SharedGuardEngine {
     ];
   }
 
-  summarize(results: SharedGuardEngineResult[]): { passed: number; failed: number; avgScore: number } {
+  summarize(results: SharedGuardEngineResult[]): {
+    passed: number;
+    failed: number;
+    avgScore: number;
+  } {
     const passed = results.filter((r) => r.ok).length;
     const failed = results.length - passed;
     const avgScore = results.reduce((a, b) => a + b.score, 0) / (results.length || 1);

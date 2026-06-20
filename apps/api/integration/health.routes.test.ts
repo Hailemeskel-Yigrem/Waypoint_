@@ -3,7 +3,9 @@ import { createTestApp } from '../helpers/setup.js';
 
 describe('Health routes', () => {
   let app: Awaited<ReturnType<typeof createTestApp>>['app'];
-  afterEach(async () => { await app?.close(); });
+  afterEach(async () => {
+    await app?.close();
+  });
 
   it('GET /api/v1/health', async () => {
     ({ app } = await createTestApp());
@@ -12,4 +14,3 @@ describe('Health routes', () => {
     expect(res.json().data.status).toBe('ok');
   });
 });
-

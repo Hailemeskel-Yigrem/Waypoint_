@@ -16,4 +16,3 @@ describe('HealthService', () => {
     expect(status.ready).toBe(true);
   });
 });
-

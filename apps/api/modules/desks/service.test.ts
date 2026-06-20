@@ -18,7 +18,14 @@ describe('DeskService', () => {
     orgId = (await orgRepo.create({ name: 'O', slug: 'o2' })).id;
     const spaceRepo = new MemorySpaceRepository();
     spaceId = (await spaceRepo.create({ organizationId: orgId, name: 'S', type: 'office' })).id;
-    const billing = new BillingService(new MemoryBillingRepository(), orgRepo, new MemoryUserRepository(), spaceRepo, new MemoryDeskRepository(), new MemoryBookingRepository());
+    const billing = new BillingService(
+      new MemoryBillingRepository(),
+      orgRepo,
+      new MemoryUserRepository(),
+      spaceRepo,
+      new MemoryDeskRepository(),
+      new MemoryBookingRepository(),
+    );
     service = new DeskService(new MemoryDeskRepository(), spaceRepo, billing);
   });
 
@@ -32,4 +39,3 @@ describe('DeskService', () => {
     expect(result.ok).toBe(false);
   });
 });
-

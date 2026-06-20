@@ -17,16 +17,26 @@ describe('BillingService plan limits', () => {
     const orgRepo = new MemoryOrganizationRepository();
     orgId = (await orgRepo.create({ name: 'O', slug: 'bill', plan: 'free' })).id;
     userRepo = new MemoryUserRepository();
-    service = new BillingService(new MemoryBillingRepository(), orgRepo, userRepo, new MemorySpaceRepository(), new MemoryDeskRepository(), new MemoryBookingRepository());
+    service = new BillingService(
+      new MemoryBillingRepository(),
+      orgRepo,
+      userRepo,
+      new MemorySpaceRepository(),
+      new MemoryDeskRepository(),
+      new MemoryBookingRepository(),
+    );
   });
 
   it('blocks seats beyond free plan limit', async () => {
     for (let i = 0; i < BILLING_LIMITS.free.maxSeats; i++) {
-      const u = await userRepo.create({ organizationId: orgId, email: `u${i}@t.com`, name: `U${i}` });
+      const u = await userRepo.create({
+        organizationId: orgId,
+        email: `u${i}@t.com`,
+        name: `U${i}`,
+      });
       await userRepo.update(orgId, u.id, { status: 'active' });
     }
     const result = await service.canAddSeat(orgId);
     expect(result.ok).toBe(false);
   });
 });
-

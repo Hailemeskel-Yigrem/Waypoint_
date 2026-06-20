@@ -10,4 +10,3 @@ describe('config', () => {
     expect(config.PORT).toBe(3000);
   });
 });
-

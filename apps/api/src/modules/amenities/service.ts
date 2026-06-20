@@ -1,7 +1,12 @@
 import { AppError } from '../../lib/errors.js';
 import { ok, err, type Result } from '../../lib/result.js';
 import type { AmenityRepository } from './repository.js';
-import type { Amenity, AmenityReservation, CreateAmenityInput, CreateReservationInput } from './types.js';
+import type {
+  Amenity,
+  AmenityReservation,
+  CreateAmenityInput,
+  CreateReservationInput,
+} from './types.js';
 import type { PaginationQuery, PaginatedResult } from '../../lib/pagination.js';
 import type { SpaceRepository } from '../spaces/repository.js';
 
@@ -11,7 +16,10 @@ export class AmenityService {
     private readonly spaceRepo: SpaceRepository,
   ) {}
 
-  async create(organizationId: string, input: Omit<CreateAmenityInput, 'organizationId'>): Promise<Result<Amenity>> {
+  async create(
+    organizationId: string,
+    input: Omit<CreateAmenityInput, 'organizationId'>,
+  ): Promise<Result<Amenity>> {
     const space = await this.spaceRepo.findById(organizationId, input.spaceId);
     if (!space) return err(AppError.notFound('Space', input.spaceId));
     const amenity = await this.repo.create({ ...input, organizationId });

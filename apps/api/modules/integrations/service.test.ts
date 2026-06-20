@@ -18,7 +18,11 @@ describe('IntegrationService', () => {
   });
 
   it('activates integration with valid config', async () => {
-    const created = await service.create(orgId, { provider: 'webhook', name: 'WH', config: { url: 'https://example.com/hook' } });
+    const created = await service.create(orgId, {
+      provider: 'webhook',
+      name: 'WH',
+      config: { url: 'https://example.com/hook' },
+    });
     expect(created.ok).toBe(true);
     if (created.ok) {
       const activated = await service.activate(orgId, created.value.id);
@@ -26,4 +30,3 @@ describe('IntegrationService', () => {
     }
   });
 });
-

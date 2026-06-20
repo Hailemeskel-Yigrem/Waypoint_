@@ -71,7 +71,12 @@ export class BookingService {
     const billingCheck = await this.billing.canCreateBooking(organizationId);
     if (!billingCheck.ok) return billingCheck as Result<never>;
 
-    const accessCheck = await this.access.canBook(organizationId, userId, input.deskId, input.spaceId);
+    const accessCheck = await this.access.canBook(
+      organizationId,
+      userId,
+      input.deskId,
+      input.spaceId,
+    );
     if (!accessCheck.ok) return accessCheck as Result<never>;
 
     const resources = await this.validateResources(organizationId, input.deskId, input.spaceId);
@@ -102,7 +107,11 @@ export class BookingService {
     return ok(booking);
   }
 
-  async update(organizationId: string, id: string, input: UpdateBookingInput): Promise<Result<Booking>> {
+  async update(
+    organizationId: string,
+    id: string,
+    input: UpdateBookingInput,
+  ): Promise<Result<Booking>> {
     const existing = await this.repo.findById(organizationId, id);
     if (!existing) return err(AppError.notFound('Booking', id));
     if (existing.status === 'cancelled' || existing.status === 'completed') {

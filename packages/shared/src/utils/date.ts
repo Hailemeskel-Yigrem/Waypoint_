@@ -48,12 +48,7 @@ export function minutesBetween(start: Date, end: Date): number {
   return Math.round((end.getTime() - start.getTime()) / MS_PER_MINUTE);
 }
 
-export function overlaps(
-  aStart: Date,
-  aEnd: Date,
-  bStart: Date,
-  bEnd: Date,
-): boolean {
+export function overlaps(aStart: Date, aEnd: Date, bStart: Date, bEnd: Date): boolean {
   return aStart < bEnd && bStart < aEnd;
 }
 

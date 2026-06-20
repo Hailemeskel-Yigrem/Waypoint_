@@ -16,7 +16,13 @@ describe('AnalyticsService', () => {
     orgId = (await new MemoryOrganizationRepository().create({ name: 'O', slug: 'ana' })).id;
     const desks = new MemoryDeskRepository();
     const bookings = new MemoryBookingRepository();
-    const repo = new AnalyticsDataRepository(desks, bookings, new MemoryVisitorRepository(), new MemoryUserRepository(), new MemorySpaceRepository());
+    const repo = new AnalyticsDataRepository(
+      desks,
+      bookings,
+      new MemoryVisitorRepository(),
+      new MemoryUserRepository(),
+      new MemorySpaceRepository(),
+    );
     service = new AnalyticsService(repo);
   });
 
@@ -26,4 +32,3 @@ describe('AnalyticsService', () => {
     if (result.ok) expect(result.value.organizationId).toBe(orgId);
   });
 });
-

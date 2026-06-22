@@ -41,3 +41,8 @@ dump.rdb
 # Local packaging
 *.zip
 .waypoint-tmp/
+
+# Python / generator caches
+__pycache__/
+*.pyc
+scripts/__pycache__/

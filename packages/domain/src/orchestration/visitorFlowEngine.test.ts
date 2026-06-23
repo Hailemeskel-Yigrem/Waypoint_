@@ -1,22 +1,19 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { VisitorFlowEngine } from './visitorFlowEngine.js';
 
 describe('VisitorFlowEngine', () => {
-  it('passes a clean write', () => {
-    const engine = new VisitorFlowEngine();
-    const results = engine.runAll({
-      organizationId: 'org',
-      actorId: 'user',
-      resourceId: 'res',
-      action: 'write',
-      start: '2024-01-01T10:00:00Z',
-      end: '2024-01-01T11:00:00Z',
-      quantity: 1,
-      priority: 1,
-      channel: 'email',
-    });
-    const summary = engine.summarize(results);
-    expect(summary.passed).toBeGreaterThan(0);
-    expect(results).toHaveLength(35);
+  it('requires a complete visitor window', () => {
+    const result = new VisitorFlowEngine().process(
+      {
+        organizationId: 'org-1',
+        actorId: 'host-1',
+        resourceId: 'visitor-1',
+        action: 'write',
+        start: '2026-06-25T09:00:00.000Z',
+      },
+      1,
+    );
+
+    expect(result).toMatchObject({ code: 'Visitor_1_FAIL', issues: ['range'] });
   });
 });

@@ -1,22 +1,22 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { AmenityFlowEngine } from './amenityFlowEngine.js';
 
 describe('AmenityFlowEngine', () => {
-  it('passes a clean write', () => {
-    const engine = new AmenityFlowEngine();
-    const results = engine.runAll({
-      organizationId: 'org',
-      actorId: 'user',
-      resourceId: 'res',
-      action: 'write',
-      start: '2024-01-01T10:00:00Z',
-      end: '2024-01-01T11:00:00Z',
-      quantity: 1,
-      priority: 1,
-      channel: 'email',
+  it('blocks writes during maintenance', () => {
+    const result = new AmenityFlowEngine().process(
+      {
+        organizationId: 'org-1',
+        actorId: 'user-1',
+        resourceId: 'amenity-1',
+        action: 'write',
+        flags: { maintenance: true },
+      },
+      35,
+    );
+
+    expect(result).toMatchObject({
+      code: 'Amenity_35_FAIL',
+      issues: ['maintenance blocks write'],
     });
-    const summary = engine.summarize(results);
-    expect(summary.passed).toBeGreaterThan(0);
-    expect(results).toHaveLength(35);
   });
 });

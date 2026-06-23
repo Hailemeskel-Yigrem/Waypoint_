@@ -5,3 +5,4 @@ export * from './utils/index.js';
 export * from './validators/index.js';
 export * from './result.js';
 export * from './events.js';
+export * from './operationalRuleEngine.js';

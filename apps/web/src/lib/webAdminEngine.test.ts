@@ -1,22 +1,19 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { WebAdminEngine } from './webAdminEngine.js';
 
 describe('WebAdminEngine', () => {
-  it('passes a clean write', () => {
-    const engine = new WebAdminEngine();
-    const results = engine.runAll({
-      organizationId: 'org',
-      actorId: 'user',
-      resourceId: 'res',
-      action: 'write',
-      start: '2024-01-01T10:00:00Z',
-      end: '2024-01-01T11:00:00Z',
-      quantity: 1,
-      priority: 1,
-      channel: 'email',
-    });
-    const summary = engine.summarize(results);
-    expect(summary.passed).toBeGreaterThan(0);
-    expect(results).toHaveLength(35);
+  it('rejects an out-of-range administrative priority', () => {
+    const result = new WebAdminEngine().process(
+      {
+        organizationId: 'org-1',
+        actorId: 'admin-1',
+        resourceId: 'setting-1',
+        action: 'write',
+        priority: 11,
+      },
+      1,
+    );
+
+    expect(result).toMatchObject({ code: 'Admin_1_FAIL', issues: ['priority out of range'] });
   });
 });

@@ -19,6 +19,7 @@
     "lint": "node -e \"process.exit(0)\""
   },
   "dependencies": {
+    "@waypoint/shared": "workspace:*",
     "zod": "^3.23.8"
   },
   "devDependencies": {

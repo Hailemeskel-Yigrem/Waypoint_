@@ -1,22 +1,13 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { IntegrationFlowEngine } from './integrationFlowEngine.js';
 
 describe('IntegrationFlowEngine', () => {
-  it('passes a clean write', () => {
-    const engine = new IntegrationFlowEngine();
-    const results = engine.runAll({
-      organizationId: 'org',
-      actorId: 'user',
-      resourceId: 'res',
-      action: 'write',
-      start: '2024-01-01T10:00:00Z',
-      end: '2024-01-01T11:00:00Z',
-      quantity: 1,
-      priority: 1,
-      channel: 'email',
-    });
-    const summary = engine.summarize(results);
-    expect(summary.passed).toBeGreaterThan(0);
-    expect(results).toHaveLength(35);
+  it('rejects requests without a resource identifier', () => {
+    const result = new IntegrationFlowEngine().process(
+      { organizationId: 'org-1', actorId: 'user-1', resourceId: '', action: 'read' },
+      1,
+    );
+
+    expect(result).toMatchObject({ code: 'Integrate_1_FAIL', issues: ['resourceId'] });
   });
 });

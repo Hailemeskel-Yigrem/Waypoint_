@@ -1,22 +1,20 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { PortalBookingEngine } from './portalBookingEngine.js';
 
 describe('PortalBookingEngine', () => {
-  it('passes a clean write', () => {
-    const engine = new PortalBookingEngine();
-    const results = engine.runAll({
-      organizationId: 'org',
-      actorId: 'user',
-      resourceId: 'res',
-      action: 'write',
-      start: '2024-01-01T10:00:00Z',
-      end: '2024-01-01T11:00:00Z',
-      quantity: 1,
-      priority: 1,
-      channel: 'email',
-    });
-    const summary = engine.summarize(results);
-    expect(summary.passed).toBeGreaterThan(0);
-    expect(results).toHaveLength(35);
+  it('rejects a booking whose time range is reversed', () => {
+    const result = new PortalBookingEngine().process(
+      {
+        organizationId: 'org-1',
+        actorId: 'user-1',
+        resourceId: 'desk-1',
+        action: 'write',
+        start: '2026-06-25T12:00:00.000Z',
+        end: '2026-06-25T09:00:00.000Z',
+      },
+      1,
+    );
+
+    expect(result).toMatchObject({ code: 'PortalBook_1_FAIL', issues: ['range'] });
   });
 });

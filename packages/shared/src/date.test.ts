@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { addMinutes, overlaps, formatDuration, isSameDay, startOfDay } from '../utils/date.js';
+import { addMinutes, overlaps, formatDuration, isSameDay, startOfDay } from './utils/date.js';
 
 describe('date utils', () => {
   it('addMinutes', () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { money, addMoney, formatMoney, sumMoney, dollarsToCents } from '../utils/money.js';
+import { money, addMoney, formatMoney, sumMoney, dollarsToCents } from './utils/money.js';
 
 describe('money utils', () => {
   it('creates money', () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { paginate } from '../types/pagination.js';
+import { paginate } from './types/pagination.js';
 
 describe('paginate', () => {
   it('paginates items', () => {

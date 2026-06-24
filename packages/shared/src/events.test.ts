@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { WaypointEvents, createEventPayload } from '../events.js';
+import { WaypointEvents, createEventPayload } from './events.js';
 
 describe('events', () => {
   it('has stable event names', () => {

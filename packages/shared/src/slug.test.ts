@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { slugify, isValidSlug, uniqueSlug } from '../utils/slug.js';
+import { slugify, isValidSlug, uniqueSlug } from './utils/slug.js';
 
 describe('slug', () => {
   it('slugifies text', () => {

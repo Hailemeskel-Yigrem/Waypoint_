@@ -1,709 +1,111 @@
-export interface UtilizationRow {
+export interface ReportRow {
   organizationId: string;
   label: string;
   value: number;
   sampleSize: number;
 }
 
-export function buildUtilizationReport(rows: UtilizationRow[]): {
+export interface ReportSummary<Row extends ReportRow = ReportRow> {
   total: number;
   average: number;
   max: number;
   min: number;
-  top: UtilizationRow[];
-} {
-  if (!rows.length) {
-    return { total: 0, average: 0, max: 0, min: 0, top: [] };
-  }
-  const values = rows.map((r) => r.value);
-  const total = values.reduce((a, b) => a + b, 0);
-  const average = total / values.length;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const top = [...rows].sort((a, b) => b.value - a.value).slice(0, 10);
-  return { total, average, max, min, top };
+  top: Row[];
 }
 
-export function normalizeUtilization(rows: UtilizationRow[]): UtilizationRow[] {
+export function buildReport<Row extends ReportRow>(rows: Row[]): ReportSummary<Row> {
+  if (!rows.length) return { total: 0, average: 0, max: 0, min: 0, top: [] };
+
+  const values = rows.map((row) => row.value);
+  const total = values.reduce((sum, value) => sum + value, 0);
+  return {
+    total,
+    average: total / values.length,
+    max: Math.max(...values),
+    min: Math.min(...values),
+    top: [...rows].sort((left, right) => right.value - left.value).slice(0, 10),
+  };
+}
+
+export function normalizeReport<Row extends ReportRow>(rows: Row[]): Row[] {
   return rows
-    .filter((r) => r.organizationId && r.sampleSize >= 0)
-    .map((r) => ({
-      ...r,
-      value: Number.isFinite(r.value) ? Math.max(0, r.value) : 0,
-      label: r.label.trim(),
+    .filter((row) => row.organizationId.trim() && row.sampleSize >= 0)
+    .map((row) => ({
+      ...row,
+      value: Number.isFinite(row.value) ? Math.max(0, row.value) : 0,
+      label: row.label.trim(),
     }));
 }
 
-export function explainUtilization(summary: ReturnType<typeof buildUtilizationReport>): string[] {
-  const lines: string[] = [];
-  lines.push(`Samples aggregated: ${summary.top.length} top rows`);
-  lines.push(`Average value: ${summary.average.toFixed(2)}`);
-  lines.push(`Range: ${summary.min} - ${summary.max}`);
+export function explainReport(summary: ReportSummary): string[] {
+  const lines = [
+    `Samples aggregated: ${summary.top.length} top rows`,
+    `Average value: ${summary.average.toFixed(2)}`,
+    `Range: ${summary.min} - ${summary.max}`,
+  ];
   if (summary.average > 80) lines.push('High pressure detected');
   if (summary.average < 20) lines.push('Low utilization opportunity');
   return lines;
 }
 
-export interface NoShowsRow {
-  organizationId: string;
-  label: string;
-  value: number;
-  sampleSize: number;
-}
+export type UtilizationRow = ReportRow;
+export type NoShowsRow = ReportRow;
+export type VisitorThroughputRow = ReportRow;
+export type AmenityDemandRow = ReportRow;
+export type DeskHeatmapRow = ReportRow;
+export type MeetingLengthRow = ReportRow;
+export type CancellationReasonsRow = ReportRow;
+export type CheckinComplianceRow = ReportRow;
+export type PeakHoursRow = ReportRow;
+export type NeighborhoodMixRow = ReportRow;
+export type TeamPresenceRow = ReportRow;
+export type CostCentersRow = ReportRow;
+export type BookingLeadTimeRow = ReportRow;
+export type ResourceIdleTimeRow = ReportRow;
+export type OverbookingRiskRow = ReportRow;
 
-export function buildNoShowsReport(rows: NoShowsRow[]): {
-  total: number;
-  average: number;
-  max: number;
-  min: number;
-  top: NoShowsRow[];
-} {
-  if (!rows.length) {
-    return { total: 0, average: 0, max: 0, min: 0, top: [] };
-  }
-  const values = rows.map((r) => r.value);
-  const total = values.reduce((a, b) => a + b, 0);
-  const average = total / values.length;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const top = [...rows].sort((a, b) => b.value - a.value).slice(0, 10);
-  return { total, average, max, min, top };
-}
-
-export function normalizeNoShows(rows: NoShowsRow[]): NoShowsRow[] {
-  return rows
-    .filter((r) => r.organizationId && r.sampleSize >= 0)
-    .map((r) => ({
-      ...r,
-      value: Number.isFinite(r.value) ? Math.max(0, r.value) : 0,
-      label: r.label.trim(),
-    }));
-}
-
-export function explainNoShows(summary: ReturnType<typeof buildNoShowsReport>): string[] {
-  const lines: string[] = [];
-  lines.push(`Samples aggregated: ${summary.top.length} top rows`);
-  lines.push(`Average value: ${summary.average.toFixed(2)}`);
-  lines.push(`Range: ${summary.min} - ${summary.max}`);
-  if (summary.average > 80) lines.push('High pressure detected');
-  if (summary.average < 20) lines.push('Low utilization opportunity');
-  return lines;
-}
-
-export interface VisitorThroughputRow {
-  organizationId: string;
-  label: string;
-  value: number;
-  sampleSize: number;
-}
-
-export function buildVisitorThroughputReport(rows: VisitorThroughputRow[]): {
-  total: number;
-  average: number;
-  max: number;
-  min: number;
-  top: VisitorThroughputRow[];
-} {
-  if (!rows.length) {
-    return { total: 0, average: 0, max: 0, min: 0, top: [] };
-  }
-  const values = rows.map((r) => r.value);
-  const total = values.reduce((a, b) => a + b, 0);
-  const average = total / values.length;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const top = [...rows].sort((a, b) => b.value - a.value).slice(0, 10);
-  return { total, average, max, min, top };
-}
-
-export function normalizeVisitorThroughput(rows: VisitorThroughputRow[]): VisitorThroughputRow[] {
-  return rows
-    .filter((r) => r.organizationId && r.sampleSize >= 0)
-    .map((r) => ({
-      ...r,
-      value: Number.isFinite(r.value) ? Math.max(0, r.value) : 0,
-      label: r.label.trim(),
-    }));
-}
-
-export function explainVisitorThroughput(
-  summary: ReturnType<typeof buildVisitorThroughputReport>,
-): string[] {
-  const lines: string[] = [];
-  lines.push(`Samples aggregated: ${summary.top.length} top rows`);
-  lines.push(`Average value: ${summary.average.toFixed(2)}`);
-  lines.push(`Range: ${summary.min} - ${summary.max}`);
-  if (summary.average > 80) lines.push('High pressure detected');
-  if (summary.average < 20) lines.push('Low utilization opportunity');
-  return lines;
-}
-
-export interface AmenityDemandRow {
-  organizationId: string;
-  label: string;
-  value: number;
-  sampleSize: number;
-}
-
-export function buildAmenityDemandReport(rows: AmenityDemandRow[]): {
-  total: number;
-  average: number;
-  max: number;
-  min: number;
-  top: AmenityDemandRow[];
-} {
-  if (!rows.length) {
-    return { total: 0, average: 0, max: 0, min: 0, top: [] };
-  }
-  const values = rows.map((r) => r.value);
-  const total = values.reduce((a, b) => a + b, 0);
-  const average = total / values.length;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const top = [...rows].sort((a, b) => b.value - a.value).slice(0, 10);
-  return { total, average, max, min, top };
-}
-
-export function normalizeAmenityDemand(rows: AmenityDemandRow[]): AmenityDemandRow[] {
-  return rows
-    .filter((r) => r.organizationId && r.sampleSize >= 0)
-    .map((r) => ({
-      ...r,
-      value: Number.isFinite(r.value) ? Math.max(0, r.value) : 0,
-      label: r.label.trim(),
-    }));
-}
-
-export function explainAmenityDemand(
-  summary: ReturnType<typeof buildAmenityDemandReport>,
-): string[] {
-  const lines: string[] = [];
-  lines.push(`Samples aggregated: ${summary.top.length} top rows`);
-  lines.push(`Average value: ${summary.average.toFixed(2)}`);
-  lines.push(`Range: ${summary.min} - ${summary.max}`);
-  if (summary.average > 80) lines.push('High pressure detected');
-  if (summary.average < 20) lines.push('Low utilization opportunity');
-  return lines;
-}
-
-export interface DeskHeatmapRow {
-  organizationId: string;
-  label: string;
-  value: number;
-  sampleSize: number;
-}
-
-export function buildDeskHeatmapReport(rows: DeskHeatmapRow[]): {
-  total: number;
-  average: number;
-  max: number;
-  min: number;
-  top: DeskHeatmapRow[];
-} {
-  if (!rows.length) {
-    return { total: 0, average: 0, max: 0, min: 0, top: [] };
-  }
-  const values = rows.map((r) => r.value);
-  const total = values.reduce((a, b) => a + b, 0);
-  const average = total / values.length;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const top = [...rows].sort((a, b) => b.value - a.value).slice(0, 10);
-  return { total, average, max, min, top };
-}
-
-export function normalizeDeskHeatmap(rows: DeskHeatmapRow[]): DeskHeatmapRow[] {
-  return rows
-    .filter((r) => r.organizationId && r.sampleSize >= 0)
-    .map((r) => ({
-      ...r,
-      value: Number.isFinite(r.value) ? Math.max(0, r.value) : 0,
-      label: r.label.trim(),
-    }));
-}
-
-export function explainDeskHeatmap(summary: ReturnType<typeof buildDeskHeatmapReport>): string[] {
-  const lines: string[] = [];
-  lines.push(`Samples aggregated: ${summary.top.length} top rows`);
-  lines.push(`Average value: ${summary.average.toFixed(2)}`);
-  lines.push(`Range: ${summary.min} - ${summary.max}`);
-  if (summary.average > 80) lines.push('High pressure detected');
-  if (summary.average < 20) lines.push('Low utilization opportunity');
-  return lines;
-}
-
-export interface MeetingLengthRow {
-  organizationId: string;
-  label: string;
-  value: number;
-  sampleSize: number;
-}
-
-export function buildMeetingLengthReport(rows: MeetingLengthRow[]): {
-  total: number;
-  average: number;
-  max: number;
-  min: number;
-  top: MeetingLengthRow[];
-} {
-  if (!rows.length) {
-    return { total: 0, average: 0, max: 0, min: 0, top: [] };
-  }
-  const values = rows.map((r) => r.value);
-  const total = values.reduce((a, b) => a + b, 0);
-  const average = total / values.length;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const top = [...rows].sort((a, b) => b.value - a.value).slice(0, 10);
-  return { total, average, max, min, top };
-}
-
-export function normalizeMeetingLength(rows: MeetingLengthRow[]): MeetingLengthRow[] {
-  return rows
-    .filter((r) => r.organizationId && r.sampleSize >= 0)
-    .map((r) => ({
-      ...r,
-      value: Number.isFinite(r.value) ? Math.max(0, r.value) : 0,
-      label: r.label.trim(),
-    }));
-}
-
-export function explainMeetingLength(
-  summary: ReturnType<typeof buildMeetingLengthReport>,
-): string[] {
-  const lines: string[] = [];
-  lines.push(`Samples aggregated: ${summary.top.length} top rows`);
-  lines.push(`Average value: ${summary.average.toFixed(2)}`);
-  lines.push(`Range: ${summary.min} - ${summary.max}`);
-  if (summary.average > 80) lines.push('High pressure detected');
-  if (summary.average < 20) lines.push('Low utilization opportunity');
-  return lines;
-}
-
-export interface CancellationReasonsRow {
-  organizationId: string;
-  label: string;
-  value: number;
-  sampleSize: number;
-}
-
-export function buildCancellationReasonsReport(rows: CancellationReasonsRow[]): {
-  total: number;
-  average: number;
-  max: number;
-  min: number;
-  top: CancellationReasonsRow[];
-} {
-  if (!rows.length) {
-    return { total: 0, average: 0, max: 0, min: 0, top: [] };
-  }
-  const values = rows.map((r) => r.value);
-  const total = values.reduce((a, b) => a + b, 0);
-  const average = total / values.length;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const top = [...rows].sort((a, b) => b.value - a.value).slice(0, 10);
-  return { total, average, max, min, top };
-}
-
-export function normalizeCancellationReasons(
-  rows: CancellationReasonsRow[],
-): CancellationReasonsRow[] {
-  return rows
-    .filter((r) => r.organizationId && r.sampleSize >= 0)
-    .map((r) => ({
-      ...r,
-      value: Number.isFinite(r.value) ? Math.max(0, r.value) : 0,
-      label: r.label.trim(),
-    }));
-}
-
-export function explainCancellationReasons(
-  summary: ReturnType<typeof buildCancellationReasonsReport>,
-): string[] {
-  const lines: string[] = [];
-  lines.push(`Samples aggregated: ${summary.top.length} top rows`);
-  lines.push(`Average value: ${summary.average.toFixed(2)}`);
-  lines.push(`Range: ${summary.min} - ${summary.max}`);
-  if (summary.average > 80) lines.push('High pressure detected');
-  if (summary.average < 20) lines.push('Low utilization opportunity');
-  return lines;
-}
-
-export interface CheckinComplianceRow {
-  organizationId: string;
-  label: string;
-  value: number;
-  sampleSize: number;
-}
-
-export function buildCheckinComplianceReport(rows: CheckinComplianceRow[]): {
-  total: number;
-  average: number;
-  max: number;
-  min: number;
-  top: CheckinComplianceRow[];
-} {
-  if (!rows.length) {
-    return { total: 0, average: 0, max: 0, min: 0, top: [] };
-  }
-  const values = rows.map((r) => r.value);
-  const total = values.reduce((a, b) => a + b, 0);
-  const average = total / values.length;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const top = [...rows].sort((a, b) => b.value - a.value).slice(0, 10);
-  return { total, average, max, min, top };
-}
-
-export function normalizeCheckinCompliance(rows: CheckinComplianceRow[]): CheckinComplianceRow[] {
-  return rows
-    .filter((r) => r.organizationId && r.sampleSize >= 0)
-    .map((r) => ({
-      ...r,
-      value: Number.isFinite(r.value) ? Math.max(0, r.value) : 0,
-      label: r.label.trim(),
-    }));
-}
-
-export function explainCheckinCompliance(
-  summary: ReturnType<typeof buildCheckinComplianceReport>,
-): string[] {
-  const lines: string[] = [];
-  lines.push(`Samples aggregated: ${summary.top.length} top rows`);
-  lines.push(`Average value: ${summary.average.toFixed(2)}`);
-  lines.push(`Range: ${summary.min} - ${summary.max}`);
-  if (summary.average > 80) lines.push('High pressure detected');
-  if (summary.average < 20) lines.push('Low utilization opportunity');
-  return lines;
-}
-
-export interface PeakHoursRow {
-  organizationId: string;
-  label: string;
-  value: number;
-  sampleSize: number;
-}
-
-export function buildPeakHoursReport(rows: PeakHoursRow[]): {
-  total: number;
-  average: number;
-  max: number;
-  min: number;
-  top: PeakHoursRow[];
-} {
-  if (!rows.length) {
-    return { total: 0, average: 0, max: 0, min: 0, top: [] };
-  }
-  const values = rows.map((r) => r.value);
-  const total = values.reduce((a, b) => a + b, 0);
-  const average = total / values.length;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const top = [...rows].sort((a, b) => b.value - a.value).slice(0, 10);
-  return { total, average, max, min, top };
-}
-
-export function normalizePeakHours(rows: PeakHoursRow[]): PeakHoursRow[] {
-  return rows
-    .filter((r) => r.organizationId && r.sampleSize >= 0)
-    .map((r) => ({
-      ...r,
-      value: Number.isFinite(r.value) ? Math.max(0, r.value) : 0,
-      label: r.label.trim(),
-    }));
-}
-
-export function explainPeakHours(summary: ReturnType<typeof buildPeakHoursReport>): string[] {
-  const lines: string[] = [];
-  lines.push(`Samples aggregated: ${summary.top.length} top rows`);
-  lines.push(`Average value: ${summary.average.toFixed(2)}`);
-  lines.push(`Range: ${summary.min} - ${summary.max}`);
-  if (summary.average > 80) lines.push('High pressure detected');
-  if (summary.average < 20) lines.push('Low utilization opportunity');
-  return lines;
-}
-
-export interface NeighborhoodMixRow {
-  organizationId: string;
-  label: string;
-  value: number;
-  sampleSize: number;
-}
-
-export function buildNeighborhoodMixReport(rows: NeighborhoodMixRow[]): {
-  total: number;
-  average: number;
-  max: number;
-  min: number;
-  top: NeighborhoodMixRow[];
-} {
-  if (!rows.length) {
-    return { total: 0, average: 0, max: 0, min: 0, top: [] };
-  }
-  const values = rows.map((r) => r.value);
-  const total = values.reduce((a, b) => a + b, 0);
-  const average = total / values.length;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const top = [...rows].sort((a, b) => b.value - a.value).slice(0, 10);
-  return { total, average, max, min, top };
-}
-
-export function normalizeNeighborhoodMix(rows: NeighborhoodMixRow[]): NeighborhoodMixRow[] {
-  return rows
-    .filter((r) => r.organizationId && r.sampleSize >= 0)
-    .map((r) => ({
-      ...r,
-      value: Number.isFinite(r.value) ? Math.max(0, r.value) : 0,
-      label: r.label.trim(),
-    }));
-}
-
-export function explainNeighborhoodMix(
-  summary: ReturnType<typeof buildNeighborhoodMixReport>,
-): string[] {
-  const lines: string[] = [];
-  lines.push(`Samples aggregated: ${summary.top.length} top rows`);
-  lines.push(`Average value: ${summary.average.toFixed(2)}`);
-  lines.push(`Range: ${summary.min} - ${summary.max}`);
-  if (summary.average > 80) lines.push('High pressure detected');
-  if (summary.average < 20) lines.push('Low utilization opportunity');
-  return lines;
-}
-
-export interface TeamPresenceRow {
-  organizationId: string;
-  label: string;
-  value: number;
-  sampleSize: number;
-}
-
-export function buildTeamPresenceReport(rows: TeamPresenceRow[]): {
-  total: number;
-  average: number;
-  max: number;
-  min: number;
-  top: TeamPresenceRow[];
-} {
-  if (!rows.length) {
-    return { total: 0, average: 0, max: 0, min: 0, top: [] };
-  }
-  const values = rows.map((r) => r.value);
-  const total = values.reduce((a, b) => a + b, 0);
-  const average = total / values.length;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const top = [...rows].sort((a, b) => b.value - a.value).slice(0, 10);
-  return { total, average, max, min, top };
-}
-
-export function normalizeTeamPresence(rows: TeamPresenceRow[]): TeamPresenceRow[] {
-  return rows
-    .filter((r) => r.organizationId && r.sampleSize >= 0)
-    .map((r) => ({
-      ...r,
-      value: Number.isFinite(r.value) ? Math.max(0, r.value) : 0,
-      label: r.label.trim(),
-    }));
-}
-
-export function explainTeamPresence(summary: ReturnType<typeof buildTeamPresenceReport>): string[] {
-  const lines: string[] = [];
-  lines.push(`Samples aggregated: ${summary.top.length} top rows`);
-  lines.push(`Average value: ${summary.average.toFixed(2)}`);
-  lines.push(`Range: ${summary.min} - ${summary.max}`);
-  if (summary.average > 80) lines.push('High pressure detected');
-  if (summary.average < 20) lines.push('Low utilization opportunity');
-  return lines;
-}
-
-export interface CostCentersRow {
-  organizationId: string;
-  label: string;
-  value: number;
-  sampleSize: number;
-}
-
-export function buildCostCentersReport(rows: CostCentersRow[]): {
-  total: number;
-  average: number;
-  max: number;
-  min: number;
-  top: CostCentersRow[];
-} {
-  if (!rows.length) {
-    return { total: 0, average: 0, max: 0, min: 0, top: [] };
-  }
-  const values = rows.map((r) => r.value);
-  const total = values.reduce((a, b) => a + b, 0);
-  const average = total / values.length;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const top = [...rows].sort((a, b) => b.value - a.value).slice(0, 10);
-  return { total, average, max, min, top };
-}
-
-export function normalizeCostCenters(rows: CostCentersRow[]): CostCentersRow[] {
-  return rows
-    .filter((r) => r.organizationId && r.sampleSize >= 0)
-    .map((r) => ({
-      ...r,
-      value: Number.isFinite(r.value) ? Math.max(0, r.value) : 0,
-      label: r.label.trim(),
-    }));
-}
-
-export function explainCostCenters(summary: ReturnType<typeof buildCostCentersReport>): string[] {
-  const lines: string[] = [];
-  lines.push(`Samples aggregated: ${summary.top.length} top rows`);
-  lines.push(`Average value: ${summary.average.toFixed(2)}`);
-  lines.push(`Range: ${summary.min} - ${summary.max}`);
-  if (summary.average > 80) lines.push('High pressure detected');
-  if (summary.average < 20) lines.push('Low utilization opportunity');
-  return lines;
-}
-
-export interface BookingLeadTimeRow {
-  organizationId: string;
-  label: string;
-  value: number;
-  sampleSize: number;
-}
-
-export function buildBookingLeadTimeReport(rows: BookingLeadTimeRow[]): {
-  total: number;
-  average: number;
-  max: number;
-  min: number;
-  top: BookingLeadTimeRow[];
-} {
-  if (!rows.length) {
-    return { total: 0, average: 0, max: 0, min: 0, top: [] };
-  }
-  const values = rows.map((r) => r.value);
-  const total = values.reduce((a, b) => a + b, 0);
-  const average = total / values.length;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const top = [...rows].sort((a, b) => b.value - a.value).slice(0, 10);
-  return { total, average, max, min, top };
-}
-
-export function normalizeBookingLeadTime(rows: BookingLeadTimeRow[]): BookingLeadTimeRow[] {
-  return rows
-    .filter((r) => r.organizationId && r.sampleSize >= 0)
-    .map((r) => ({
-      ...r,
-      value: Number.isFinite(r.value) ? Math.max(0, r.value) : 0,
-      label: r.label.trim(),
-    }));
-}
-
-export function explainBookingLeadTime(
-  summary: ReturnType<typeof buildBookingLeadTimeReport>,
-): string[] {
-  const lines: string[] = [];
-  lines.push(`Samples aggregated: ${summary.top.length} top rows`);
-  lines.push(`Average value: ${summary.average.toFixed(2)}`);
-  lines.push(`Range: ${summary.min} - ${summary.max}`);
-  if (summary.average > 80) lines.push('High pressure detected');
-  if (summary.average < 20) lines.push('Low utilization opportunity');
-  return lines;
-}
-
-export interface ResourceIdleTimeRow {
-  organizationId: string;
-  label: string;
-  value: number;
-  sampleSize: number;
-}
-
-export function buildResourceIdleTimeReport(rows: ResourceIdleTimeRow[]): {
-  total: number;
-  average: number;
-  max: number;
-  min: number;
-  top: ResourceIdleTimeRow[];
-} {
-  if (!rows.length) {
-    return { total: 0, average: 0, max: 0, min: 0, top: [] };
-  }
-  const values = rows.map((r) => r.value);
-  const total = values.reduce((a, b) => a + b, 0);
-  const average = total / values.length;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const top = [...rows].sort((a, b) => b.value - a.value).slice(0, 10);
-  return { total, average, max, min, top };
-}
-
-export function normalizeResourceIdleTime(rows: ResourceIdleTimeRow[]): ResourceIdleTimeRow[] {
-  return rows
-    .filter((r) => r.organizationId && r.sampleSize >= 0)
-    .map((r) => ({
-      ...r,
-      value: Number.isFinite(r.value) ? Math.max(0, r.value) : 0,
-      label: r.label.trim(),
-    }));
-}
-
-export function explainResourceIdleTime(
-  summary: ReturnType<typeof buildResourceIdleTimeReport>,
-): string[] {
-  const lines: string[] = [];
-  lines.push(`Samples aggregated: ${summary.top.length} top rows`);
-  lines.push(`Average value: ${summary.average.toFixed(2)}`);
-  lines.push(`Range: ${summary.min} - ${summary.max}`);
-  if (summary.average > 80) lines.push('High pressure detected');
-  if (summary.average < 20) lines.push('Low utilization opportunity');
-  return lines;
-}
-
-export interface OverbookingRiskRow {
-  organizationId: string;
-  label: string;
-  value: number;
-  sampleSize: number;
-}
-
-export function buildOverbookingRiskReport(rows: OverbookingRiskRow[]): {
-  total: number;
-  average: number;
-  max: number;
-  min: number;
-  top: OverbookingRiskRow[];
-} {
-  if (!rows.length) {
-    return { total: 0, average: 0, max: 0, min: 0, top: [] };
-  }
-  const values = rows.map((r) => r.value);
-  const total = values.reduce((a, b) => a + b, 0);
-  const average = total / values.length;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const top = [...rows].sort((a, b) => b.value - a.value).slice(0, 10);
-  return { total, average, max, min, top };
-}
-
-export function normalizeOverbookingRisk(rows: OverbookingRiskRow[]): OverbookingRiskRow[] {
-  return rows
-    .filter((r) => r.organizationId && r.sampleSize >= 0)
-    .map((r) => ({
-      ...r,
-      value: Number.isFinite(r.value) ? Math.max(0, r.value) : 0,
-      label: r.label.trim(),
-    }));
-}
-
-export function explainOverbookingRisk(
-  summary: ReturnType<typeof buildOverbookingRiskReport>,
-): string[] {
-  const lines: string[] = [];
-  lines.push(`Samples aggregated: ${summary.top.length} top rows`);
-  lines.push(`Average value: ${summary.average.toFixed(2)}`);
-  lines.push(`Range: ${summary.min} - ${summary.max}`);
-  if (summary.average > 80) lines.push('High pressure detected');
-  if (summary.average < 20) lines.push('Low utilization opportunity');
-  return lines;
-}
+export const buildUtilizationReport = buildReport<UtilizationRow>;
+export const normalizeUtilization = normalizeReport<UtilizationRow>;
+export const explainUtilization = explainReport;
+export const buildNoShowsReport = buildReport<NoShowsRow>;
+export const normalizeNoShows = normalizeReport<NoShowsRow>;
+export const explainNoShows = explainReport;
+export const buildVisitorThroughputReport = buildReport<VisitorThroughputRow>;
+export const normalizeVisitorThroughput = normalizeReport<VisitorThroughputRow>;
+export const explainVisitorThroughput = explainReport;
+export const buildAmenityDemandReport = buildReport<AmenityDemandRow>;
+export const normalizeAmenityDemand = normalizeReport<AmenityDemandRow>;
+export const explainAmenityDemand = explainReport;
+export const buildDeskHeatmapReport = buildReport<DeskHeatmapRow>;
+export const normalizeDeskHeatmap = normalizeReport<DeskHeatmapRow>;
+export const explainDeskHeatmap = explainReport;
+export const buildMeetingLengthReport = buildReport<MeetingLengthRow>;
+export const normalizeMeetingLength = normalizeReport<MeetingLengthRow>;
+export const explainMeetingLength = explainReport;
+export const buildCancellationReasonsReport = buildReport<CancellationReasonsRow>;
+export const normalizeCancellationReasons = normalizeReport<CancellationReasonsRow>;
+export const explainCancellationReasons = explainReport;
+export const buildCheckinComplianceReport = buildReport<CheckinComplianceRow>;
+export const normalizeCheckinCompliance = normalizeReport<CheckinComplianceRow>;
+export const explainCheckinCompliance = explainReport;
+export const buildPeakHoursReport = buildReport<PeakHoursRow>;
+export const normalizePeakHours = normalizeReport<PeakHoursRow>;
+export const explainPeakHours = explainReport;
+export const buildNeighborhoodMixReport = buildReport<NeighborhoodMixRow>;
+export const normalizeNeighborhoodMix = normalizeReport<NeighborhoodMixRow>;
+export const explainNeighborhoodMix = explainReport;
+export const buildTeamPresenceReport = buildReport<TeamPresenceRow>;
+export const normalizeTeamPresence = normalizeReport<TeamPresenceRow>;
+export const explainTeamPresence = explainReport;
+export const buildCostCentersReport = buildReport<CostCentersRow>;
+export const normalizeCostCenters = normalizeReport<CostCentersRow>;
+export const explainCostCenters = explainReport;
+export const buildBookingLeadTimeReport = buildReport<BookingLeadTimeRow>;
+export const normalizeBookingLeadTime = normalizeReport<BookingLeadTimeRow>;
+export const explainBookingLeadTime = explainReport;
+export const buildResourceIdleTimeReport = buildReport<ResourceIdleTimeRow>;
+export const normalizeResourceIdleTime = normalizeReport<ResourceIdleTimeRow>;
+export const explainResourceIdleTime = explainReport;
+export const buildOverbookingRiskReport = buildReport<OverbookingRiskRow>;
+export const normalizeOverbookingRisk = normalizeReport<OverbookingRiskRow>;
+export const explainOverbookingRisk = explainReport;

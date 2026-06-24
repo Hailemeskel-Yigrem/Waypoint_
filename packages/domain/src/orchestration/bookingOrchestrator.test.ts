@@ -1,33 +1,54 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { BookingOrchestrator } from './bookingOrchestrator.js';
 
-describe('BookingOrchestrator', () => {
-  const orch = new BookingOrchestrator(
-    { minMinutes: 30, maxMinutes: 240, maxAttendees: 12, requireNeighborhood: false },
-    [],
-  );
+const input = {
+  organizationId: 'org-1',
+  resourceId: 'desk-1',
+  userId: 'user-1',
+  start: '2026-06-25T09:00:00.000Z',
+  end: '2026-06-25T10:00:00.000Z',
+  attendeeCount: 1,
+};
 
-  it('passes a valid booking across scenarios', async () => {
-    const results = await orch.runAll({
-      organizationId: 'org',
-      resourceId: 'desk-1',
-      userId: 'user-1',
-      start: '2024-06-01T09:00:00Z',
-      end: '2024-06-01T10:00:00Z',
-      attendeeCount: 1,
-    });
-    expect(results.every((r) => r.ok)).toBe(true);
+describe('BookingOrchestrator', () => {
+  const settings = {
+    minMinutes: 30,
+    maxMinutes: 240,
+    maxAttendees: 12,
+    requireNeighborhood: false,
+  };
+
+  it('evaluates all configured scenarios without duplicating validation logic', async () => {
+    const results = await new BookingOrchestrator(settings, []).runAll(input);
+
+    expect(results).toHaveLength(40);
+    expect(results[0]).toMatchObject({ code: 'SCENARIO_1_OK', projection: { priority: 1 } });
+    expect(results[39]).toMatchObject({ code: 'SCENARIO_40_OK', projection: { priority: 0 } });
   });
 
-  it('fails invalid ranges', async () => {
-    const result = await orch.validateScenario1({
-      organizationId: 'org',
-      resourceId: 'desk-1',
-      userId: 'user-1',
-      start: '2024-06-01T11:00:00Z',
-      end: '2024-06-01T10:00:00Z',
-      attendeeCount: 1,
+  it('reports invalid ranges and attendee limits together', async () => {
+    const result = await new BookingOrchestrator(settings, []).validateScenario(
+      { ...input, end: 'not-a-date', attendeeCount: 13 },
+      1,
+    );
+
+    expect(result).toEqual({
+      ok: false,
+      code: 'SCENARIO_1_FAILED',
+      issues: ['invalid range', 'too many attendees'],
     });
-    expect(result.ok).toBe(false);
+  });
+
+  it('returns the conflicting booking ids and ignores cancelled bookings', async () => {
+    const orchestrator = new BookingOrchestrator(settings, [
+      { ...input, id: 'active', status: 'confirmed' },
+      { ...input, id: 'cancelled', status: 'cancelled' },
+    ]);
+
+    await expect(orchestrator.validateScenario(input, 3)).resolves.toEqual({
+      ok: false,
+      code: 'CONFLICT',
+      issues: ['active'],
+    });
   });
 });

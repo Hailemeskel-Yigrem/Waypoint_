@@ -5,11 +5,23 @@ import type { Amenity } from '@waypoint/shared';
 export function useAmenities() {
   const [amenities, setAmenities] = useState<Amenity[]>([]);
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    listAmenities()
-      .then(setAmenities)
-      .finally(() => setLoading(false));
+  const [error, setError] = useState<Error | null>(null);
+
+  const refresh = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      setAmenities(await listAmenities());
+    } catch (cause) {
+      setError(cause instanceof Error ? cause : new Error('Failed to load amenities'));
+    } finally {
+      setLoading(false);
+    }
   }, []);
-  const refresh = useCallback(() => listAmenities().then(setAmenities), []);
-  return { amenities, loading, refresh };
+
+  useEffect(() => {
+    void refresh();
+  }, [refresh]);
+
+  return { amenities, loading, error, refresh };
 }

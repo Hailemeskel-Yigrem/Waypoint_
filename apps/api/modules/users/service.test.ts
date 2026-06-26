@@ -8,6 +8,7 @@ import { MemoryBookingRepository } from '../../src/modules/bookings/memory.repos
 import { MemoryBillingRepository } from '../../src/modules/billing/memory.repository.js';
 import { BillingService } from '../../src/modules/billing/service.js';
 import { hashPassword } from '../../src/lib/crypto.js';
+import { TEST_PASSWORD } from '../../tests/helpers/fixtures.js';
 
 describe('UserService', () => {
   let service: UserService;
@@ -32,7 +33,7 @@ describe('UserService', () => {
     const result = await service.create(orgId, {
       email: 'a@test.com',
       name: 'A',
-      password: 'password123',
+      password: TEST_PASSWORD,
     });
     expect(result.ok).toBe(true);
   });
@@ -52,14 +53,14 @@ describe('UserService', () => {
       organizationId: orgId,
       email: 'login@test.com',
       name: 'Login',
-      passwordHash: hashPassword('password123'),
+      passwordHash: hashPassword(TEST_PASSWORD),
     });
     const user = await repo.findByEmail(orgId, 'login@test.com');
     await repo.update(orgId, user!.id, { status: 'active' });
     const result = await svc.login({
       organizationId: orgId,
       email: 'login@test.com',
-      password: 'password123',
+      password: TEST_PASSWORD,
     });
     expect(result.ok).toBe(true);
   });

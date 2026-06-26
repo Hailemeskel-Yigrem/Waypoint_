@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from 'vitest';
-import { seedTestContext, seedOrganization, seedUser, authHeader } from '../helpers/setup.js';
+import { seedTestContext, seedOrganization, seedUser, authHeader } from '../tests/helpers/setup.js';
 
 describe('Tenant isolation', () => {
   let ctx: Awaited<ReturnType<typeof seedTestContext>>;

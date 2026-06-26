@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from 'vitest';
-import { seedTestContext } from '../helpers/setup.js';
+import { seedTestContext } from '../tests/helpers/setup.js';
 
 describe('Space routes', () => {
   let ctx: Awaited<ReturnType<typeof seedTestContext>>;
@@ -16,5 +16,18 @@ describe('Space routes', () => {
       payload: { name: 'HQ', type: 'office', capacity: 100 },
     });
     expect(res.statusCode).toBe(201);
+  });
+
+  it('returns a structured validation error for malformed input', async () => {
+    ctx = await seedTestContext();
+    const res = await ctx.app.inject({
+      method: 'POST',
+      url: '/api/v1/spaces',
+      headers: { authorization: ctx.authToken },
+      payload: { name: '', type: 'warehouse', capacity: 0 },
+    });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.json().error).toMatchObject({ code: 'VALIDATION_ERROR' });
   });
 });

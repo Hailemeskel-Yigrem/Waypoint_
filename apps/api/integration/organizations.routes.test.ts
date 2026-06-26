@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from 'vitest';
-import { createTestApp } from '../helpers/setup.js';
+import { createTestApp } from '../tests/helpers/setup.js';
 
 describe('Organization routes', () => {
   let app: Awaited<ReturnType<typeof createTestApp>>['app'];

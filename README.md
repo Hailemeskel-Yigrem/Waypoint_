@@ -33,7 +33,7 @@ Multi-tenant workplace operations platform for managing spaces, desks, bookings,
 ## Getting started
 
 ```bash
-pnpm install
+pnpm install --frozen-lockfile
 pnpm build
 pnpm test
 ```
@@ -57,6 +57,22 @@ API health endpoints:
 
 - `GET /api/v1/health`
 - `GET /api/v1/health/ready`
+- `GET /api/v1/metrics` (Prometheus text format)
+
+### Quality checks
+
+Run the same checks enforced by CI:
+
+```bash
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm test:coverage
+pnpm audit --prod --audit-level high
+pnpm build
+```
+
+Portal coverage is enforced at 70% line coverage for its tested data hooks and booking engine.
 
 ### Database
 
@@ -81,6 +97,9 @@ See [`.env.example`](./.env.example):
 - `DATABASE_URL` — PostgreSQL connection string
 - `REDIS_URL` — Redis connection (worker queue)
 - `JWT_SECRET` — Secret for signing tokens (minimum 16 characters)
+- `NODE_ENV` — Runtime environment (`development`, `test`, or `production`)
+- `USE_MEMORY_REPOS` — Use in-memory repositories for local development and tests
+- `LOG_PRETTY` — Enable human-readable local logs; disable for structured production JSON
 - `VITE_API_URL` — API base URL for web/portal apps
 
 ## Documentation

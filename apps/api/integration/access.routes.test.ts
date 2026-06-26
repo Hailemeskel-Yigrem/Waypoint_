@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from 'vitest';
-import { seedTestContext } from '../helpers/setup.js';
+import { seedTestContext } from '../tests/helpers/setup.js';
 
 describe('Access routes', () => {
   let ctx: Awaited<ReturnType<typeof seedTestContext>>;

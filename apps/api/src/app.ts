@@ -21,6 +21,7 @@ import {
   type Dispatchers,
 } from './modules/index.js';
 import { registerRoutes } from './routes.js';
+import { apiMetrics } from './modules/health/metrics.js';
 
 declare module 'fastify' {
   interface FastifyInstance {
@@ -77,6 +78,14 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   app.decorate('authHook', authHook);
 
   app.addHook('onRequest', requestIdMiddleware);
+  app.addHook('onResponse', async (request, reply) => {
+    apiMetrics.observeHttpRequest({
+      method: request.method,
+      route: request.routeOptions.url ?? 'unmatched',
+      statusCode: reply.statusCode,
+      durationMs: reply.elapsedTime,
+    });
+  });
   app.setErrorHandler(createErrorHandler(logger));
   app.setNotFoundHandler(notFoundHandler);
 

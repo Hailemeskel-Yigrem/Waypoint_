@@ -10,6 +10,7 @@ import { hashPassword } from '../../src/lib/crypto.js';
 import { encodeJwt } from '../../src/middleware/auth.js';
 import type { AuthContext } from '../../src/lib/types.js';
 import { resetConfig } from '../../src/config/index.js';
+import { TEST_PASSWORD } from './fixtures.js';
 
 process.env.NODE_ENV = 'test';
 process.env.USE_MEMORY_REPOS = 'true';
@@ -53,7 +54,7 @@ export async function seedUser(
     email,
     name: overrides.name ?? 'Test User',
     role: overrides.role ?? 'admin',
-    passwordHash: hashPassword(overrides.password ?? 'password123'),
+    passwordHash: hashPassword(overrides.password ?? TEST_PASSWORD),
   });
   await repos.users.update(organizationId, user.id, { status: 'active' });
   return { userId: user.id, email };

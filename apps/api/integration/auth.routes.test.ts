@@ -1,5 +1,6 @@
 import { describe, it, expect, afterEach } from 'vitest';
-import { seedTestContext } from '../helpers/setup.js';
+import { seedTestContext } from '../tests/helpers/setup.js';
+import { TEST_PASSWORD } from '../tests/helpers/fixtures.js';
 
 describe('Auth routes', () => {
   let ctx: Awaited<ReturnType<typeof seedTestContext>>;
@@ -12,7 +13,7 @@ describe('Auth routes', () => {
     const res = await ctx.app.inject({
       method: 'POST',
       url: '/api/v1/auth/login',
-      payload: { email: 'user@acme.test', password: 'password123', organizationId: ctx.orgId },
+      payload: { email: 'user@acme.test', password: TEST_PASSWORD, organizationId: ctx.orgId },
     });
     expect(res.statusCode).toBe(200);
     expect(res.json().data.token).toBeDefined();

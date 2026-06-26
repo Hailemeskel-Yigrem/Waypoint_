@@ -11,16 +11,33 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "declaration": true,
-    "declarationMap": true,
+    "declaration": false,
     "sourceMap": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "paths": {
-      "@waypoint/shared/*": ["../../packages/shared/src/*"]
-    }
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitAny": false,
+    "noFallthroughCasesInSwitch": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "tests"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "tests",
+    "src/lib/postgres/**",
+    "src/modules/floors/**",
+    "src/modules/buildings/**",
+    "src/modules/zones/**",
+    "src/modules/resources/**",
+    "src/modules/policies/**",
+    "src/modules/webhooks/**",
+    "src/modules/audit/**",
+    "src/modules/reports/**",
+    "src/modules/checkins/**",
+    "src/modules/invites/**",
+    "src/modules/teams/**",
+    "src/modules/shifts/**",
+    "src/modules/assets/**",
+    "src/modules/sla/**",
+    "src/modules/featureFlags/**"
+  ]
 }

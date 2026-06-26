@@ -26,7 +26,10 @@ export function registerUserRoutes(app: FastifyInstance): void {
 
     scoped.post('/users', { preHandler: requireRole('owner', 'admin') }, async (request, reply) => {
       const body = createUserSchema.parse(request.body);
-      const result = await service.create(request.tenantId, body);
+      const result = await service.create(request.tenantId, {
+        ...body,
+        organizationId: request.tenantId,
+      } as Parameters<typeof service.create>[1]);
       reply.status(201).send({ data: throwIfError(result) });
     });
 

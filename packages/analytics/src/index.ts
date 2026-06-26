@@ -8,4 +8,9 @@ export * from './metrics/peak_concurrency.js';
 export * from './metrics/avg_meeting_length.js';
 export * from './metrics/cancellation_rate.js';
 export * from './metrics/checkin_compliance.js';
-export * from './reports/engine.js';
+export {
+  buildUtilizationReport,
+  explainUtilization,
+  buildNoShowsReport,
+  buildVisitorThroughputReport,
+} from './reports/engine.js';

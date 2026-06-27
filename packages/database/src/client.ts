@@ -13,9 +13,9 @@ export function createPool(connectionString: string): pg.Pool {
 
 export function poolToClient(pool: pg.Pool): DatabaseClient {
   return {
-    query: async (sql, params) => {
+    async query<T = Record<string, unknown>>(sql: string, params?: unknown[]) {
       const result = await pool.query(sql, params);
-      return { rows: result.rows as Record<string, unknown>[], rowCount: result.rowCount ?? 0 };
+      return { rows: result.rows as T[], rowCount: result.rowCount ?? 0 };
     },
     close: () => pool.end(),
   };

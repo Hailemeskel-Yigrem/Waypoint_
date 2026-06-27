@@ -40,7 +40,7 @@ export function VisitorsPage() {
           },
           { key: 'status', header: 'Status', render: (r) => <Badge>{String(r.status)}</Badge> },
         ]}
-        data={visitors as any}
+        data={visitors}
       />
       <Modal
         open={open}

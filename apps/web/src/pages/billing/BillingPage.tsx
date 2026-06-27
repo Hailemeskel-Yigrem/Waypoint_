@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageHeader, Table, Badge, Spinner } from '@waypoint/ui';
 import { useBilling } from '../../hooks/useBilling.js';
-import { formatMoney } from '@waypoint/shared';
+import { formatMoney, type Money } from '@waypoint/shared';
 
 export function BillingPage() {
   const { invoices, loading } = useBilling();
@@ -21,7 +21,7 @@ export function BillingPage() {
         columns={[
           { key: 'number', header: 'Invoice #' },
           { key: 'period', header: 'Period', render: (r) => `${r.periodStart} — ${r.periodEnd}` },
-          { key: 'total', header: 'Total', render: (r) => formatMoney(r.total as any) },
+          { key: 'total', header: 'Total', render: (r) => formatMoney(r.total as Money) },
           {
             key: 'status',
             header: 'Status',
@@ -35,7 +35,7 @@ export function BillingPage() {
             render: (r) => new Date(String(r.dueAt)).toLocaleDateString(),
           },
         ]}
-        data={invoices as any}
+        data={invoices}
       />
     </>
   );

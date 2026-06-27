@@ -46,7 +46,7 @@ export function BookingsPage() {
               ) : null,
           },
         ]}
-        data={bookings as any}
+        data={bookings}
       />
     </>
   );

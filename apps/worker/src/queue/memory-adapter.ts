@@ -12,7 +12,7 @@ export class MemoryQueueAdapter implements QueueAdapter {
     this.pollMs = pollMs;
   }
 
-  async add<T extends JobData>(
+  async add<T = JobData>(
     name: string,
     data: T,
     opts?: { delayMs?: number; maxAttempts?: number },

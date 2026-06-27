@@ -1,7 +1,4 @@
-export {
-  defaultSettings,
-  type OrgBookingSettings,
-} from './maxAdvanceBookingDays.js';
+export { defaultSettings, type OrgBookingSettings } from './maxAdvanceBookingDays.js';
 
 export { evaluateMaxAdvanceBookingDays } from './maxAdvanceBookingDays.js';
 export { evaluateMinBookingDurationMinutes } from './minBookingDurationMinutes.js';

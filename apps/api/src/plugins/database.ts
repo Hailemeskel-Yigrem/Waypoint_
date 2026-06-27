@@ -1,7 +1,9 @@
 import fp from 'fastify-plugin';
 import type { FastifyInstance } from 'fastify';
 import type { Pool, PoolClient, QueryResult, QueryResultRow } from 'pg';
-import { Pool as PgPool } from 'pg';
+import pg from 'pg';
+
+const { Pool: PgPool } = pg;
 
 export interface DatabaseClient {
   query<T extends QueryResultRow = QueryResultRow>(

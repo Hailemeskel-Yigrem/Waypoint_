@@ -27,7 +27,7 @@ export function AmenitiesPage() {
               ),
             },
           ]}
-          data={amenities as any}
+          data={amenities}
         />
       )}
     </>

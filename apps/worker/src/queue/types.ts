@@ -1,10 +1,8 @@
 export type JobStatus = 'waiting' | 'active' | 'completed' | 'failed' | 'delayed';
 
-export interface JobData {
-  [key: string]: unknown;
-}
+export type JobData = Record<string, unknown>;
 
-export interface Job<T extends JobData = JobData> {
+export interface Job<T = JobData> {
   id: string;
   name: string;
   data: T;
@@ -18,10 +16,10 @@ export interface Job<T extends JobData = JobData> {
   delayMs?: number;
 }
 
-export type JobHandler<T extends JobData = JobData> = (job: Job<T>) => Promise<void>;
+export type JobHandler<T = JobData> = (job: Job<T>) => Promise<void>;
 
 export interface QueueAdapter {
-  add<T extends JobData>(
+  add<T = JobData>(
     name: string,
     data: T,
     opts?: { delayMs?: number; maxAttempts?: number },

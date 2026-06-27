@@ -13,7 +13,7 @@ export interface TableProps<T> {
   emptyMessage?: string;
 }
 
-export function Table<T extends Record<string, unknown>>({
+export function Table<T>({
   columns,
   data,
   keyField = 'id' as keyof T,
@@ -32,15 +32,18 @@ export function Table<T extends Record<string, unknown>>({
         </tr>
       </thead>
       <tbody>
-        {data.map((row, i) => (
-          <tr key={String(row[keyField] ?? i)} className={styles.tr}>
-            {columns.map((c) => (
-              <td key={c.key} className={styles.td}>
-                {c.render ? c.render(row) : String(row[c.key] ?? '')}
-              </td>
-            ))}
-          </tr>
-        ))}
+        {data.map((row, i) => {
+          const record = row as Record<string, unknown>;
+          return (
+            <tr key={String(record[String(keyField)] ?? i)} className={styles.tr}>
+              {columns.map((c) => (
+                <td key={c.key} className={styles.td}>
+                  {c.render ? c.render(row) : String(record[c.key] ?? '')}
+                </td>
+              ))}
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { type SignOptions } from 'jsonwebtoken';
 import type { SessionUser } from './session.js';
 
 export interface JwtPayload {
@@ -12,7 +12,7 @@ export interface JwtPayload {
 
 export interface JwtOptions {
   secret: string;
-  expiresIn?: string | number;
+  expiresIn?: SignOptions['expiresIn'];
   issuer?: string;
 }
 
@@ -23,10 +23,11 @@ export function issueToken(user: SessionUser, options: JwtOptions): string {
     email: user.email,
     role: user.role,
   };
-  return jwt.sign(payload, options.secret, {
+  const signOptions: SignOptions = {
     expiresIn: options.expiresIn ?? '7d',
     issuer: options.issuer ?? 'waypoint',
-  });
+  };
+  return jwt.sign(payload, options.secret, signOptions);
 }
 
 export function verifyToken(token: string, secret: string): JwtPayload {

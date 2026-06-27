@@ -1,5 +1,5 @@
-import Redis from 'ioredis';
-import type { Job, JobData, JobHandler, QueueAdapter } from './types.js';
+import { Redis } from 'ioredis';
+import type { Job, JobHandler, QueueAdapter } from './types.js';
 
 const QUEUE_KEY = 'waypoint:jobs';
 const JOB_PREFIX = 'waypoint:job:';
@@ -15,7 +15,7 @@ export class RedisQueueAdapter implements QueueAdapter {
     this.pollMs = pollMs;
   }
 
-  async add<T extends JobData>(
+  async add<T>(
     name: string,
     data: T,
     opts?: { delayMs?: number; maxAttempts?: number },
@@ -59,13 +59,13 @@ export class RedisQueueAdapter implements QueueAdapter {
   async getStats() {
     const keys = await this.redis.keys(`${JOB_PREFIX}*`);
     const jobs = await Promise.all(
-      keys.map(async (k) => JSON.parse((await this.redis.get(k))!) as Job),
+      keys.map(async (k: string) => JSON.parse((await this.redis.get(k))!) as Job),
     );
     return {
-      waiting: jobs.filter((j) => j.status === 'waiting').length,
-      active: jobs.filter((j) => j.status === 'active').length,
-      completed: jobs.filter((j) => j.status === 'completed').length,
-      failed: jobs.filter((j) => j.status === 'failed').length,
+      waiting: jobs.filter((j: Job) => j.status === 'waiting').length,
+      active: jobs.filter((j: Job) => j.status === 'active').length,
+      completed: jobs.filter((j: Job) => j.status === 'completed').length,
+      failed: jobs.filter((j: Job) => j.status === 'failed').length,
     };
   }
 

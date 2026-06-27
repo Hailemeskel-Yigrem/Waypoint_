@@ -29,7 +29,7 @@ export function MyBookingsPage() {
               ) : null,
           },
         ]}
-        data={bookings as any}
+        data={bookings}
       />
     </>
   );

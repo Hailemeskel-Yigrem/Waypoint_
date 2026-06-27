@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { USER_ROLES } from '../constants/index.js';
-import { emailSchema, entityIdSchema } from './common.js';
+import { emailSchema } from './common.js';
 
 export const createUserSchema = z.object({
   email: emailSchema,

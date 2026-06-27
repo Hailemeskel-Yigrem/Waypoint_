@@ -28,7 +28,7 @@ export function AnalyticsPage() {
           { key: 'visitorsCount', header: 'Visitors' },
           { key: 'occupancyRate', header: 'Occupancy %', render: (r) => `${r.occupancyRate}%` },
         ]}
-        data={data as any}
+        data={data}
       />
     </>
   );

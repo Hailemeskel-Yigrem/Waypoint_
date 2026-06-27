@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM node:22-bookworm-slim AS base
+FROM node:22-alpine AS base
 WORKDIR /app
 RUN corepack enable
 
@@ -10,7 +10,12 @@ COPY packages ./packages
 RUN pnpm install --frozen-lockfile || pnpm install
 
 FROM deps AS build
-RUN pnpm build
+RUN pnpm --filter @waypoint/shared build \
+ && pnpm --filter @waypoint/domain build \
+ && pnpm --filter @waypoint/logging build \
+ && pnpm --filter @waypoint/config build \
+ && pnpm --filter @waypoint/api build \
+ && pnpm --filter @waypoint/worker build
 
 FROM base AS api
 ENV NODE_ENV=production

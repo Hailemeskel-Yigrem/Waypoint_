@@ -10,6 +10,7 @@ import {
   Spinner,
   useToast,
 } from '@waypoint/ui';
+import type { SpaceType } from '@waypoint/shared';
 import { useSpaces } from '../../hooks/useSpaces.js';
 import { Link } from 'react-router-dom';
 
@@ -24,8 +25,9 @@ export function SpacesListPage() {
     await create({
       name,
       slug: name.toLowerCase().replace(/\s+/g, '-'),
-      type: type as any,
+      type: type as SpaceType,
       capacity: 1,
+      amenities: [],
     });
     push('Space created', 'success');
     setOpen(false);
@@ -51,7 +53,7 @@ export function SpacesListPage() {
           { key: 'capacity', header: 'Capacity' },
           { key: 'floor', header: 'Floor' },
         ]}
-        data={spaces as any}
+        data={spaces}
       />
       <Modal
         open={open}

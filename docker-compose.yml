@@ -32,7 +32,7 @@ services:
     environment:
       DATABASE_URL: postgres://waypoint:waypoint@postgres:5432/waypoint
       REDIS_URL: redis://redis:6379
-      JWT_SECRET: dev-secret-change-me
+      JWT_SECRET: waypoint-dev-secret-key
       PORT: "3000"
       LOG_LEVEL: info
     ports:

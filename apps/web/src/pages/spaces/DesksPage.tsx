@@ -27,7 +27,7 @@ export function DesksPage() {
             ),
           },
         ]}
-        data={desks as any}
+        data={desks}
       />
     </>
   );

@@ -1,9 +1,11 @@
-import { z } from 'zod';
+import type { ZodTypeAny } from 'zod';
 
-export function loadEnv<T extends z.ZodTypeAny>(
+type InferEnv<T extends ZodTypeAny> = T['_output'];
+
+export function loadEnv<T extends ZodTypeAny>(
   schema: T,
   source: Record<string, string | undefined> = process.env as Record<string, string | undefined>,
-): z.infer<T> {
+): InferEnv<T> {
   const parsed = schema.safeParse(source);
   if (!parsed.success) {
     const messages = parsed.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; ');
@@ -12,7 +14,7 @@ export function loadEnv<T extends z.ZodTypeAny>(
   return parsed.data;
 }
 
-export function loadEnvSafe<T extends z.ZodTypeAny>(
+export function loadEnvSafe<T extends ZodTypeAny>(
   schema: T,
   source: Record<string, string | undefined> = process.env as Record<string, string | undefined>,
 ) {

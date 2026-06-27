@@ -1,6 +1,7 @@
 **/node_modules
 **/coverage
 **/.turbo
+**/*.tsbuildinfo
 **/.git
 **/scripts
 **/*.zip

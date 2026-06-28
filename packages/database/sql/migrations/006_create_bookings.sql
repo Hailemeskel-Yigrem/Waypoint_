@@ -1,2 +1,0 @@
--- Migration: 006_create_bookings.sql
-CREATE TABLE IF NOT EXISTS bookings (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), org_id UUID NOT NULL REFERENCES organizations(id), user_id UUID NOT NULL REFERENCES users(id), resource_type VARCHAR(16) NOT NULL, resource_id UUID NOT NULL, start_at TIMESTAMPTZ NOT NULL, end_at TIMESTAMPTZ NOT NULL, status VARCHAR(32) NOT NULL DEFAULT 'confirmed', created_at TIMESTAMPTZ NOT NULL DEFAULT NOW());

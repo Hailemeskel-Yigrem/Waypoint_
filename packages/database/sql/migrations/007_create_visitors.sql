@@ -1,2 +1,0 @@
--- Migration: 007_create_visitors.sql
-CREATE TABLE IF NOT EXISTS visitors (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), org_id UUID NOT NULL REFERENCES organizations(id), host_user_id UUID NOT NULL REFERENCES users(id), first_name VARCHAR(100) NOT NULL, last_name VARCHAR(100) NOT NULL, email VARCHAR(255) NOT NULL, expected_at TIMESTAMPTZ NOT NULL, expires_at TIMESTAMPTZ NOT NULL, status VARCHAR(32) NOT NULL DEFAULT 'expected', created_at TIMESTAMPTZ NOT NULL DEFAULT NOW());

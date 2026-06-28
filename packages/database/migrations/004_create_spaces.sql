@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS spaces (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+  name VARCHAR(200) NOT NULL,
+  slug VARCHAR(64),
+  type VARCHAR(32) NOT NULL,
+  floor VARCHAR(50),
+  capacity INT NOT NULL DEFAULT 1,
+  metadata JSONB NOT NULL DEFAULT '{}',
+  is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  UNIQUE (org_id, slug)
+);

@@ -14,6 +14,7 @@ RUN pnpm --filter @waypoint/shared build \
  && pnpm --filter @waypoint/domain build \
  && pnpm --filter @waypoint/logging build \
  && pnpm --filter @waypoint/config build \
+ && pnpm --filter @waypoint/database build \
  && pnpm --filter @waypoint/api build \
  && pnpm --filter @waypoint/worker build
 

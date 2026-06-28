@@ -8,7 +8,7 @@ async function main() {
   if (!url) throw new Error('DATABASE_URL required');
   const pool = createPool(url);
   const sql = readFileSync(
-    join(dirname(fileURLToPath(import.meta.url)), '../sql/seed.sql'),
+    join(dirname(fileURLToPath(import.meta.url)), '../seeds/development.sql'),
     'utf8',
   );
   await pool.query(sql);

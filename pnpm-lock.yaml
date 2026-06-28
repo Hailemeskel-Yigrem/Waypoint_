@@ -59,6 +59,9 @@ importers:
       '@fastify/rate-limit':
         specifier: ^11.2.0
         version: 11.2.0
+      '@waypoint/database':
+        specifier: workspace:*
+        version: link:../../packages/database
       '@waypoint/domain':
         specifier: workspace:*
         version: link:../../packages/domain

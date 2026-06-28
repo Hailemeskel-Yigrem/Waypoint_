@@ -15,9 +15,10 @@ import { registerDirectoryRoutes } from './modules/directory/routes.js';
 import { registerHealthRoutes } from './modules/health/routes.js';
 
 export function registerRoutes(app: FastifyInstance): void {
+  registerHealthRoutes(app);
+
   app.register(
     async (api) => {
-      registerHealthRoutes(api);
       registerOrganizationRoutes(api);
       registerUserRoutes(api);
       registerSpaceRoutes(api);

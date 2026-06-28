@@ -40,6 +40,8 @@ pnpm test
 
 Copy `.env.example` to `.env` and set a `JWT_SECRET` of at least 16 characters before starting the API.
 
+VS Code users can also open the repository in the included dev container; it installs the locked workspace dependencies and forwards all application and infrastructure ports.
+
 ### Development
 
 ```bash
@@ -81,6 +83,19 @@ Portal coverage is enforced at 70% line coverage for its tested data hooks and b
 pnpm --filter @waypoint/database migrate
 pnpm --filter @waypoint/database seed
 ```
+
+The versioned migration runner uses advisory locking, per-migration transactions, and SHA-256 checksums. PostgreSQL integration and data-quality tests run in their own required CI job. To run them locally:
+
+```bash
+docker compose -f docker-compose.test.yml up -d --wait postgres
+TEST_DATABASE_URL=postgres://waypoint_test:waypoint_test@localhost:55432/waypoint_test \
+  pnpm --filter @waypoint/database test:integration
+TEST_DATABASE_URL=postgres://waypoint_test:waypoint_test@localhost:55432/waypoint_test \
+  pnpm --filter @waypoint/api test:integration:db
+docker compose -f docker-compose.test.yml down -v
+```
+
+See [`packages/database/README.md`](./packages/database/README.md) for schema migration guarantees and analytics lineage.
 
 ### Docker
 

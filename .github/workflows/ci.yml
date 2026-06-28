@@ -12,24 +12,76 @@ jobs:
   build-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Configure pnpm
+        uses: pnpm/action-setup@v4
+      - name: Configure Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm lint
-      - run: pnpm typecheck
-      - run: pnpm test
-      - run: pnpm test:coverage
-      - run: pnpm audit --prod --audit-level high
-      - run: pnpm build
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Verify runtime dependency manifests
+        run: pnpm run deps:check
+      - name: Lint
+        run: pnpm run lint
+      - name: Typecheck
+        run: pnpm run typecheck
+      - name: Run unit and route integration tests
+        run: pnpm run test
+      - name: Enforce coverage threshold
+        run: pnpm run test:coverage
+      - name: Audit production dependencies
+        run: pnpm audit --prod --audit-level high
+      - name: Build
+        run: pnpm run build
+
+  database-integration:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: waypoint_test
+          POSTGRES_PASSWORD: waypoint_test
+          POSTGRES_DB: waypoint_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U waypoint_test -d waypoint_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Configure pnpm
+        uses: pnpm/action-setup@v4
+      - name: Configure Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Run PostgreSQL migration and data-quality tests
+        env:
+          TEST_DATABASE_URL: postgres://waypoint_test:waypoint_test@localhost:5432/waypoint_test
+        run: pnpm --filter @waypoint/database test:integration
+      - name: Run API booking integration against PostgreSQL
+        env:
+          TEST_DATABASE_URL: postgres://waypoint_test:waypoint_test@localhost:5432/waypoint_test
+        run: pnpm --filter @waypoint/api test:integration:db
 
   docker:
     runs-on: ubuntu-latest
-    needs: build-test
+    needs: [build-test, database-integration]
     steps:
-      - uses: actions/checkout@v4
-      - run: docker build --target api -t waypoint-api:ci .
-      - run: docker build --target worker -t waypoint-worker:ci .
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Build API image
+        run: docker build --target api -t waypoint-api:ci .
+      - name: Build worker image
+        run: docker build --target worker -t waypoint-worker:ci .

@@ -1,9 +1,13 @@
 {
   "name": "waypoint",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Waypoint — multi-tenant workplace operations platform",
   "license": "MIT",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "engines": {
     "node": ">=22.0.0",
     "pnpm": ">=9.0.0"
@@ -17,13 +21,14 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
-    "test": "turbo run test",
+    "test": "vitest run --config vitest.root.config.ts && turbo run test",
     "test:coverage": "pnpm --filter @waypoint/portal test:coverage",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "clean": "turbo run clean && rimraf node_modules",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,md}\""
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "deps:check": "pnpm --recursive list --depth 0"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",

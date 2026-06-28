@@ -1,0 +1,17 @@
+{
+  "name": "Waypoint",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+  "postCreateCommand": "corepack enable && pnpm install --frozen-lockfile",
+  "forwardPorts": [3000, 5173, 5174, 5432, 6379],
+  "portsAttributes": {
+    "3000": { "label": "Waypoint API" },
+    "5173": { "label": "Admin console" },
+    "5174": { "label": "Employee portal" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
+    }
+  },
+  "remoteUser": "node"
+}

@@ -1,5 +1,5 @@
 # Runtime verification image using prebuilt API dist (avoids monorepo pnpm install in-container).
-FROM node:22-alpine
+FROM node:26-alpine
 WORKDIR /app
 COPY apps/api/dist ./dist
 RUN printf '%s\n' \

@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Configure pnpm
         uses: pnpm/action-setup@v4
       - name: Configure Node.js
@@ -56,7 +56,7 @@ jobs:
           --health-retries 10
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Configure pnpm
         uses: pnpm/action-setup@v4
       - name: Configure Node.js
@@ -80,7 +80,7 @@ jobs:
     needs: [build-test, database-integration]
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Build API image
         run: docker build --target api -t waypoint-api:ci .
       - name: Build worker image

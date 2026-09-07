@@ -22,13 +22,13 @@
   "dependencies": {
     "@waypoint/shared": "workspace:*",
     "jsonwebtoken": "^9.0.2",
-    "bcryptjs": "^2.4.3"
+    "bcryptjs": "^3.0.3"
   },
   "devDependencies": {
     "vitest": "^2.1.8",
     "typescript": "^5.7.3",
     "rimraf": "^6.0.1",
     "@types/jsonwebtoken": "^9.0.7",
-    "@types/bcryptjs": "^2.4.6"
+    "@types/bcryptjs": "^3.0.0"
   }
 }
